@@ -1,19 +1,20 @@
-<div class="page-height-o row-equal align-middle" data-ng-controller="sessionCtrl">
+<div class="page-height-o row-equal align-middle">
   <div class="column">
     <div class="card bg-white no-border">
       <div class="card-block">
-        <form role="form" class="form-layout" action="/">
+        <form role="form" class="form-layout">
           <div class="text-center m-b">
             <h4 class="text-uppercase">Welcome back</h4>
             <p>Please sign in to your account</p>
           </div>
           <div class="form-inputs">
             <label class="text-uppercase">Your email address</label>
-            <input data-ng-model="vm.email "type="email" class="form-control input-lg" placeholder="Email Address" required>
+            <input data-ng-model="vm.user.email "type="email" class="form-control input-lg" placeholder="Email Address" required>
             <label class="text-uppercase">Password</label>
-            <input data-ng-model="vm.password" type="password" class="form-control input-lg" placeholder="Password" required>
+            <input data-ng-model="vm.user.password" type="password" class="form-control input-lg" placeholder="Password" required>
           </div>
-          <button data-ng-click="vm.login()" class="btn btn-primary btn-block btn-lg m-b" type="submit">Login</button>
+
+          <button data-ng-click="vm.signin()" class="btn btn-primary btn-block btn-lg m-b" type="submit">Login</button>
           <div class="divider">
             <span>OR</span>
           </div>

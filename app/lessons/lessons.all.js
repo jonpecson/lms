@@ -1,7 +1,7 @@
 /*
  * IIFE to encapsulate code and avoid global variables
  */
-(function() {
+(function () {
 
     /*
      * attaching results controller function to the turtleFacts module 
@@ -20,63 +20,67 @@
      * as strings in an array using the $inject method we can be sure angular 
      * still knows what we want to do.
      */
-    LessonsCtrl.$inject = ['Auth', '$firebaseArray', 'firebase'];
+    LessonsCtrl.$inject = ['Auth', '$firebaseArray', 'firebase', '$state'];
 
     /*
      * definition of the results controller function itself. Taking 
      * quizMetrics as an argument
      */
-    function LessonsCtrl(Auth, $firebaseArray, firebase) {
-
+    function LessonsCtrl(Auth, $firebaseArray, firebase, $state) {
         var vm = this;
-        vm.msg = "Hello World";
+        console.log("Lessons Controller")
 
-        vm.user = {
-            email: 'jon@hybrain.co',
-            password: '@123qweasd'
+        var ref = firebase.database().ref().child("lessons");
+        // create a synchronized array
+
+        console.log("Creating a lessons reference.");
+        vm.lessons = $firebaseArray(ref);
+
+        vm.lessons.$loaded()
+            .then(function () {
+               console.log(vm.lessons);
+            })
+
+
+        // console.log(vm.lessons);
+        // add new items to the array
+        // the message is automatically added to our Firebase database!
+        vm.lesson = {
+            "title": "Step-by-step HTML and CSS for Absolute Beginners",
+            "description": "Learn how to code HTML5 + CSS3 to create your o...",
+            "thumbnail": "https://udemy-images.udemy.com/course/750x422/73080_7783_6.jpg"
         };
 
-        Auth.signInWithEmailAndPassword(vm.user.email, vm.user.password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // ...
-        }).then(function(res) {
-            console.log(res);
-        });
-
-
-        vm.login = function() {
-            Auth.signInWithEmailAndPassword(vm.user.email, vm.user.password).catch(function(error) {
+        vm.login = function () {
+            Auth.signInWithEmailAndPassword('jon@hybrain.co', '@123qweasd').catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
-            }).then(function(res) {
+            }).then(function (res) {
                 console.log(res);
             });
 
         }
 
-        // vm.writeUserData = function() { 
-        //     firebase.database().ref('users/' + 1).set({
-        //         username: 'name',
-        //         email: 'email',
-        //         profile_picture: 'imageUrl'
-        //     });
-        // }
+        vm.logout = function () {
+            Auth.signOut();
+        }
 
-        var ref = firebase.database().ref().child("messages");
-        // create a synchronized array
-        vm.messages = $firebaseArray(ref);
-        // add new items to the array
-        // the message is automatically added to our Firebase database!
-        vm.addMessage = function() {
-            vm.messages.$add({
-                text: vm.msg
-            }).then(function(x) {
-                console.log(x);
-            });
+        vm.addLesson = function () {
+            vm.lessons.$loaded()
+                .then(function () {
+                    vm.lessons.$add({
+                        title: vm.lesson.title,
+                        description: vm.lesson.description,
+                        thumbnail: vm.lesson.thumbnail
+                    }).then(function (x) {
+                        console.log(x);
+                    });
+                });
+
+            // $state.go('app.lessons.add');
+
         };
 
         /*

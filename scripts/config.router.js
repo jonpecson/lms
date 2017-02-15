@@ -7,11 +7,23 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
             window.scrollTo(0, 0);
         });
         FastClick.attach(document.body);
+
+        firebase.auth().onAuthStateChanged(function(user) {
+            if (user) {
+                // User is signed in.
+                console.log(' User is signed in.');
+            } else {
+                // No user is signed in.
+                console.log(' No user is signed in.');
+                $state.go("user.signin")
+            }
+            });
     },
+    
 ]).config(['$stateProvider', '$urlRouterProvider',
     function($stateProvider, $urlRouterProvider) {
         // For unmatched routes
-        $urlRouterProvider.otherwise('/');
+        $urlRouterProvider.otherwise('/signin');
         // Application routes
         $stateProvider.state('app', {
             abstract: true,
@@ -51,19 +63,48 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
         }).state('app.lessons.add', {
             url: '/lessons/add',
             templateUrl: './app/lessons/lessons.add.html',
-            resolve: {
-                deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                    return $ocLazyLoad.load('./app/lessons/lessons.add.js');
-                }]
-            },
+            // resolve: {
+            //     deps: ['$ocLazyLoad', function($ocLazyLoad) {
+            //         return $ocLazyLoad.load('./app/lessons/lessons.add.js');
+            //     }]
+            // },
+             resolve: {
+                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                        return $ocLazyLoad.load([{
+                            name: 'ngFileUpload',
+                            files: ['vendor/ng-file-upload/ng-file-upload-all.js']
+                        },{
+                            insertBefore: '#load_styles_before',
+                            files: ['vendor/checkbo/src/0.1.4/css/checkBo.min.css', 'vendor/chosen_v1.4.0/chosen.min.css', 'vendor/summernote/dist/summernote.css', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css']
+                        }, {
+                            files: ['vendor/checkbo/src/0.1.4/js/checkBo.min.js', 'vendor/chosen_v1.4.0/chosen.jquery.min.js', 'vendor/card/lib/js/jquery.card.js', 'vendor/bootstrap/js/tab.js', 'vendor/jquery-validation/dist/jquery.validate.min.js', 'vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js', 'vendor/bootstrap/js/tooltip.js', 'vendor/bootstrap/js/dropdown.js', 'vendor/bootstrap/js/modal.js', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js', 'vendor/summernote/dist/summernote.min.js']
+                        }, {
+                            name: 'summernote',
+                            files: ['vendor/angular-summernote/dist/angular-summernote.min.js']
+                        }]).then(function() {
+                            return $ocLazyLoad.load('./app/lessons/lessons.add.js');
+                        })
+
+                        
+                    }]
+                },
+                controller : 'lessonsAddCtrl as vm'
 
         })
-
-
-
-
-
-
+        
+        // .state('app.auth', {
+        //     abstract: true,
+        //     templateUrl: 'views/common/session.html',
+        // }).state('app.auth.signin', {
+        //     url: '/auth/signin',
+        //     templateUrl: './app/auth/auth.signin.html',
+        //     resolve: {
+        //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
+        //             return $ocLazyLoad.load('./app/auth/auth.signin.ctrl.js');
+        //         }]
+        //     },
+        //     controller: 'signinCtrl as vm'
+        // })
 
 
 
@@ -790,64 +831,47 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
             }).state('app.extras.blank', {
                 url: '/blank',
                 templateUrl: 'views/extras-blank.html'
-            }).state('user', {
+            })
+            
+            
+
+
+// Keep : Sign in user
+
+
+            .state('user', {
                 templateUrl: 'views/common/session.html',
             }).state('user.signin', {
                 url: '/signin',
-                templateUrl: 'views/extras-signin.html',
+                templateUrl: 'app/user/signin.html',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load('scripts/controllers/session.js');
+                        return $ocLazyLoad.load('app/user/session.js');
                     }]
                 },
                 data: {
                     appClasses: 'signin usersession',
                     contentClasses: 'session-wrapper'
-                }
-            }).state('user.signin_2', {
-                url: '/signin_2',
-                templateUrl: 'views/extras-signin-2.html',
-                resolve: {
-                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load('scripts/controllers/session.js');
-                    }]
                 },
-                data: {
-                    appClasses: 'signin v2 usersession',
-                    contentClasses: 'session-wrapper',
-                    noFooter: true
-                }
+                controller: 'sessionCtrl as vm'
             }).state('user.signup', {
                 url: '/signup',
                 templateUrl: 'views/extras-signup.html',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load('scripts/controllers/session.js');
+                        return $ocLazyLoad.load('app/user/session.js');
                     }]
                 },
                 data: {
                     appClasses: 'signup usersession',
                     contentClasses: 'session-wrapper'
                 }
-            }).state('user.signup_2', {
-                url: '/signup_2',
-                templateUrl: 'views/extras-signup-2.html',
-                resolve: {
-                    deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load('scripts/controllers/session.js');
-                    }]
-                },
-                data: {
-                    appClasses: 'signup v2 usersession',
-                    contentClasses: 'session-wrapper',
-                    noFooter: true
-                }
             }).state('user.forgot', {
                 url: '/forgot',
                 templateUrl: 'views/extras-forgot.html',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load('scripts/controllers/session.js');
+                        return $ocLazyLoad.load('app/user/session.js');
                     }]
                 },
                 data: {
@@ -872,14 +896,18 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
                 templateUrl: 'views/extras-lockscreen.html',
                 resolve: {
                     deps: ['$ocLazyLoad', function($ocLazyLoad) {
-                        return $ocLazyLoad.load('scripts/controllers/session.js');
+                        return $ocLazyLoad.load('app/user/session.js');
                     }]
                 },
                 data: {
                     appClasses: 'lockscreen usersession',
                     contentClasses: 'session-wrapper'
                 }
-            }).state('app.documentation', {
+            })
+            
+            // Keep
+            
+            .state('app.documentation', {
                 url: '/documentation',
                 templateUrl: 'views/docs.html',
                 resolve: {
@@ -901,3 +929,4 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
         events: false
     });
 }]);
+

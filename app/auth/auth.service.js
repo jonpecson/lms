@@ -27,9 +27,8 @@
      * quizMetrics as an argument
      */
     function Auth(firebase) {
-
+        var auth = this;
         return firebase.auth();
-
     }
 
 })();
