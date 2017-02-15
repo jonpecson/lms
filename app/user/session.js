@@ -94,6 +94,8 @@
         vm.user = {};
 
         // Everytime the app redirects in signin page it will logout the login user
+        console.log('Logging out user');
+        
         Auth.signOut();
 
         vm.signin = function () {

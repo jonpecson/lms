@@ -68,18 +68,18 @@
         }
 
         vm.addLesson = function () {
-            vm.lessons.$loaded()
-                .then(function () {
-                    vm.lessons.$add({
-                        title: vm.lesson.title,
-                        description: vm.lesson.description,
-                        thumbnail: vm.lesson.thumbnail
-                    }).then(function (x) {
-                        console.log(x);
-                    });
-                });
+            // vm.lessons.$loaded()
+            //     .then(function () {
+            //         vm.lessons.$add({
+            //             title: vm.lesson.title,
+            //             description: vm.lesson.description,
+            //             thumbnail: vm.lesson.thumbnail
+            //         }).then(function (x) {
+            //             console.log(x);
+            //         });
+            //     });
 
-            // $state.go('app.lessons.add');
+            $state.go('app.lessons.add');
 
         };
 
