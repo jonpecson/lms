@@ -70,6 +70,10 @@
         }
 
         vm.addLesson = function () {
+            
+            
+            $state.go('app.lessons.add');
+            console.log('Adding lesson');
             // vm.lessons.$loaded()
             //     .then(function () {
             //         vm.lessons.$add({
@@ -81,8 +85,7 @@
             //         });
             //     });
 
-            $state.go('app.lessons.add');
-
+            
         };
 
         vm.previewLesson = function(id) {

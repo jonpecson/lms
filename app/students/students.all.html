@@ -1,0 +1,88 @@
+<div class="page-title">
+  <div class="title">Students</div>
+  <div class="sub-title">All students</div>
+</div>
+
+<div class="card bg-white m-b">
+  <div class="card-header">Students Table
+    <button type="button" class="btn pull-right">Add new student</button>
+  </div>
+  <div class="card-block p-a-0">
+    <div class="table-responsive">
+      <table class="table m-b-0">
+        <thead>
+          <tr>
+            <th class="col-md-1">
+              <span></span>ID</th>
+            <th class="col-md-1">Photo</th>
+            <th class="col-md-2">Name</th>
+            <th class="col-md-2">Address</th>
+            <th class="col-md-1">Yearl Level</th>
+            <th class="col-md-1">Gender</th>
+            <th class="col-md-1">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <span></span>1</td>
+            <td><img class="img-circle" src="https://api.adorable.io/avatars/50/qwe.png" alt="" height="50px" width="50px"></td>
+            <td>Jose Rizal <br/> Hello World</td>
+            <td class="align-middle">
+              Brgy. 1, Kabankalan City, Negros Occidental
+            </td>
+            <td>
+              Grade 7
+            </td>
+            <td>
+              Male
+            </td>
+            <td>
+              <button type="button" class="btn btn-sm row">
+				<i class="glyphicon glyphicon-pencil"></i>
+			</button>
+
+              <button type="button" ng-click="removeRow(row)" class="btn btn-sm btn-danger">
+				<i class="glyphicon glyphicon-trash">
+				</i>
+			</button>
+            </td>
+          </tr>
+
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<!--<table id="example" datatable="ng" class="table">
+  <thead>
+    <tr>
+      <th><b>UserID</b></th>
+      <th><b>Firstname</b></th>
+      <th><b>Lastname</b></th>
+      <th><b>Email</b></th>
+      <th><b>Actions</b></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr ng-repeat="lesson in vm.lessons">
+      <td>
+        {{lesson.title}}
+      </td>
+      <td class="image"><img src="http://lorempixel.com/400/300/nature/1" alt="" height="100" width="100"></td>
+      <td>
+        {{lesson.title}}
+      </td>
+      <td>
+        {{lesson.title}}
+      </td>
+      <td>
+        <span ng-click="editUser(user)" style="color:blue;cursor: pointer; font-weight:500; font-size:15px" class="btnAdd" data-toggle="modal"
+          data-target="#myModal">Edit</span> &nbsp;&nbsp; | &nbsp;&nbsp;
+          <span ng-click="deleteUser(user)" style="color:red; cursor: pointer; font-weight:500; font-size:15px" class="btnRed">Delete</span>
+      </td>
+    </tr>
+  </tbody>
+</table>-->

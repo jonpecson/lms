@@ -70,26 +70,24 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
             // },
             resolve: {
                 deps: ['$ocLazyLoad', function ($ocLazyLoad) {
-                    [{
-                        insertBefore: '#load_styles_before',
-                        files: ['vendor/checkbo/src/0.1.4/css/checkBo.min.css', 'vendor/chosen_v1.4.0/chosen.min.css', 'vendor/summernote/dist/summernote.css', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css']
-                    }, {
-                        name: 'ngFileUpload',
-                        files: ['vendor/ng-file-upload/ng-file-upload-all.js']
-                    }, {
-                        files: ['vendor/checkbo/src/0.1.4/js/checkBo.min.js', 'vendor/chosen_v1.4.0/chosen.jquery.min.js', 'vendor/card/lib/js/jquery.card.js', 'vendor/bootstrap/js/tab.js', 'vendor/jquery-validation/dist/jquery.validate.min.js', 'vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js', 'vendor/bootstrap/js/dropdown.js', 'vendor/bootstrap/js/modal.js', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js', 'vendor/summernote/dist/summernote.min.js']
-                    }, {
-                        name: 'summernote',
-                        files: ['vendor/angular-summernote/dist/angular-summernote.min.js']
-                    }]
 
-                    return $ocLazyLoad.load().then(function () {
+                    return $ocLazyLoad.load(
+                        [{
+                            insertBefore: '#load_styles_before',
+                            files: ['vendor/checkbo/src/0.1.4/css/checkBo.min.css', 'vendor/chosen_v1.4.0/chosen.min.css', 'vendor/summernote/dist/summernote.css', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css']
+                        }, {
+                            name: 'ngFileUpload',
+                            files: ['vendor/ng-file-upload/ng-file-upload-all.js']
+                        }, {
+                            files: ['vendor/checkbo/src/0.1.4/js/checkBo.min.js', 'vendor/chosen_v1.4.0/chosen.jquery.min.js', 'vendor/card/lib/js/jquery.card.js', 'vendor/bootstrap/js/tab.js', 'vendor/jquery-validation/dist/jquery.validate.min.js', 'vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js', 'vendor/bootstrap/js/dropdown.js', 'vendor/bootstrap/js/modal.js', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js']
+                        }, {
+                            name: 'summernote',
+                            files: ['vendor/angular-summernote/dist/angular-summernote.min.js']
+                        }]
+
+                    ).then(function () {
                         return $ocLazyLoad.load('./app/lessons/lessons.add.js');
-
-
                     })
-
-
                 }]
             },
             controller: 'lessonsAddCtrl as vm'
@@ -129,21 +127,50 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
             controller: 'lessonsEditCtrl as vm'
         })
 
-            // .state('app.auth', { 
-            //     abstract: true,
-            //     templateUrl: 'views/common/session.html',
-            // }).state('app.auth.signin', {
-            //     url: '/auth/signin',
-            //     templateUrl: './app/auth/auth.signin.html',
-            //     resolve: {
-            //         deps: ['$ocLazyLoad', function($ocLazyLoad) {
-            //             return $ocLazyLoad.load('./app/auth/auth.signin.ctrl.js');
-            //         }]
-            //     },
-            //     controller: 'signinCtrl as vm'
-            // })
+        $stateProvider.state('app.students',{
+            template: '<div ui-view></div>',
+            abstract: true,
+            templateUrl: '/students',
+        }).state('app.students.all',{
+             url: '/students/all',
+            templateUrl: './app/students/students.all.html',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('./app/students/students.all.js');
+                }]
+            },
+            controller: 'studentsCtrl as vm'
+        }).state('app.students.add',{
+             url: '/students/add:id',
+            templateUrl: './app/students/students.add.html',
+            resolve: {
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                    return $ocLazyLoad.load('./app/students/students.add.js');
+                }]
+            },
+            controller: 'studentsAddCtrl as vm'
+        }).state('app.students.edit',{
+             url: '/students/edit',
+            templateUrl: './app/students/students.edit.html',
+            resolve: {
+                // deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                //     return $ocLazyLoad.load('./app/students/students.edit.js');
+                // }]
 
-
+                deps: ['$ocLazyLoad', function ($ocLazyLoad) {
+                        return $ocLazyLoad.load([{
+                            insertBefore: '#load_styles_before',
+                            files: ['vendor/chosen_v1.4.0/chosen.min.css', 'vendor/datatables/media/css/datatables.bootstrap.css']
+                        }, {
+                            serie: true,
+                            files: ['vendor/chosen_v1.4.0/chosen.jquery.min.js', 'vendor/datatables/media/js/jquery.dataTables.js', 'vendor/datatables/media/js/datatables.bootstrap.js', '']
+                        }]).then(function(){
+                            return $ocLazyLoad.load('./app/students/students.edit.js')
+                        });
+                    }]
+            },
+            controller: 'studentsEditCtrl as vm'
+        })
 
             // UI Routes
             .state('app.ui', {
