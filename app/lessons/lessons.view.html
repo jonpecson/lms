@@ -1,0 +1,36 @@
+<div class="page-title ng-scope">
+  <div class="title ng-scope">Lesson Preview</div>
+  <div class="sub-title">Designed for grade {{vm.lesson.yearLevel}} students</div>
+</div>
+<!--<div class="full-height card card-block no-border bg-white row-equal align-middle">
+            <div  class="ng-scope">-->
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card bg-white">
+      <img class="card-img-top img-responsive" data-ng-src="{{vm.lesson.thumbnail}}" alt="Card image cap">
+      <div class="card-block">
+        <h4 class="card-title">{{vm.lesson.title}}</h4>
+        <p class="card-text">{{vm.lesson.description}}</p>
+        <p class="card-text"><small class="text-muted">Available for grade {{vm.lesson.yearLevel}} students only</small></p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-6">
+    <div class="card bg-white">
+      <div class="card-block">
+        <p class="card-text">
+          <div ng-bind-html="vm.lesson.content" class="p-a ng-binding">
+        </p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <a data-ng-click="vm.goBack()" class="btn btn-primary">Go back</a>
+    </div>
+  </div>
+
+  <div class="row">
+    
+
+  </div>

@@ -38,7 +38,7 @@
 
         vm.lessons.$loaded()
             .then(function () {
-               console.log(vm.lessons);
+                console.log(vm.lessons);
             })
 
 
@@ -46,9 +46,11 @@
         // add new items to the array
         // the message is automatically added to our Firebase database!
         vm.lesson = {
-            "title": "Step-by-step HTML and CSS for Absolute Beginners",
-            "description": "Learn how to code HTML5 + CSS3 to create your o...",
-            "thumbnail": "https://udemy-images.udemy.com/course/750x422/73080_7783_6.jpg"
+            "title": "COMMUNICATION SKILLS: How To Make A Great First Impresion",
+            "description": "This course is taught by a social skills coach with 15 years of experience\n20'000 satisfied students enrolled in my courses\n300+ TOP reviews in my courses\n30 Money Back Guarantee - You have 30 days to watch the course and decide if that's for you\nLATEST: Course Updated Again for October 2015",
+            "thumbnail": "https://firebasestorage.googleapis.com/v0/b/southland-lms.appspot.com/o/images%2F603190_e33b_8.jpg?alt=media&token=9a7f743c-11ab-4905-9267-10de5e94409d",
+            "content" : "<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li style=\"color: blue;\">Super Easy <b>Theming</b> Options</li><li>Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li>Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href=\"https://github.com/fraywing/textAngular\">Here</a> </p>",
+            "yearLevel" : 10
         };
 
         vm.login = function () {
@@ -82,6 +84,28 @@
             $state.go('app.lessons.add');
 
         };
+
+        vm.previewLesson = function(id) {
+            $state.go('app.lessons.view', {"id":id});
+        }
+
+        vm.editLesson = function(id) {
+            $state.go('app.lessons.edit', {"id":id});
+        }
+
+        vm.removeLesson = function(id) {
+            var item = vm.lessons.$getRecord(id);
+            vm.lessons.$remove(item);
+        }
+
+    
+        
+
+        vm.goToLesson = function (id) {
+            console.log(id);
+
+           
+        }
 
         /*
          * The pattern used in the controllers in this app puts all the 

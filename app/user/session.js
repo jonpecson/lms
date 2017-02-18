@@ -82,37 +82,40 @@
  * as strings in an array using the $inject method we can be sure angular 
  * still knows what we want to do.
  */
-    SessionCtrl.$inject = ['Auth', '$state', 'firebase'];
+    SessionCtrl.$inject = ['Auth', '$state'];
 
     /*
      * definition of the results controller function itself. Taking 
      * quizMetrics as an argument
      */
-    function SessionCtrl(Auth, $state, firebase) {
+    function SessionCtrl(Auth, $state) {
         console.log('Session Controller');
         var vm = this;
-        vm.user = {};
+        vm.user = {
+            "email" : "jon@hybrain.co", 
+            "password" : "@123qweasd"
+        };
 
-        // Everytime the app redirects in signin page it will logout the login user
-        console.log('Logging out user');
+        // // Everytime the app redirects in signin page it will logout the login user
+        // console.log('Logging out user');
         
-        Auth.signOut();
+        // Auth.signOut();
 
         vm.signin = function () {
             console.log('Signing in');
-              Auth.signInWithEmailAndPassword(vm.user.email, vm.user.password).catch(function(error) {
+              Auth.signInWithEmailAndPassword(vm.user.email, vm.user.password).catch(function (error) {
                 // Handle Errors here.
+
+                console.log("Error");
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 // ...
-
-                 console.log(errorCode, errorMessage);
-            }).then(function(res) {
+            }).then(function (res) {
+                console.log("Result");
                 console.log(res);
-                console.log('Login successful!')
-                 $state.go('app.lessons.all');
+                $state.go('app.lessons.all');
+                
             });
-
            
         };
         
