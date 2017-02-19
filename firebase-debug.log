@@ -1,0 +1,84 @@
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] CLI Version:  3.3.0
+[debug] Platform:     darwin
+[debug] Node Version: v6.9.1
+[debug] Time:         Sun Feb 19 2017 23:50:54 GMT+0800 (PHT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/southland-lms  
+ Sun Feb 19 2017 23:50:54 GMT+0800 (PHT)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/southland-lms/tokens  
+ Sun Feb 19 2017 23:50:58 GMT+0800 (PHT)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'southland-lms'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing . directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/southland-lms/uploads/-KdM3QKBvivOEMigcF1M?fileCount=5106&message=  
+ Sun Feb 19 2017 23:51:32 GMT+0800 (PHT)
+[debug] Error: socket hang up
+    at createHangUpError (_http_client.js:254:15)
+    at TLSSocket.socketOnEnd (_http_client.js:346:23)
+    at emitNone (events.js:91:20)
+    at TLSSocket.emit (events.js:185:7)
+    at endReadableNT (_stream_readable.js:974:12)
+    at _combinedTickCallback (internal/process/next_tick.js:74:11)
+    at process._tickCallback (internal/process/next_tick.js:98:9)
+[error] 
+[error] Error: Server Error. socket hang up
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] CLI Version:  3.3.0
+[debug] Platform:     darwin
+[debug] Node Version: v6.9.1
+[debug] Time:         Mon Feb 20 2017 00:03:42 GMT+0800 (PHT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/southland-lms  
+ Mon Feb 20 2017 00:03:42 GMT+0800 (PHT)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/southland-lms/tokens  
+ Mon Feb 20 2017 00:03:46 GMT+0800 (PHT)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'southland-lms'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing . directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/southland-lms/uploads/-KdM6Mii40Qr06olpEkC?fileCount=5106&message=  
+ Mon Feb 20 2017 00:04:24 GMT+0800 (PHT)
+[debug] Error: write EPIPE
+    at exports._errnoException (util.js:1026:11)
+    at WriteWrap.afterWrite (net.js:799:14)
+[error] 
+[error] Error: Server Error. write EPIPE
+[debug] ----------------------------------------------------------------------
+[debug] Command:      /usr/local/bin/node /usr/local/bin/firebase deploy
+[debug] CLI Version:  3.3.0
+[debug] Platform:     darwin
+[debug] Node Version: v6.9.1
+[debug] Time:         Mon Feb 20 2017 00:15:31 GMT+0800 (PHT)
+[debug] ----------------------------------------------------------------------
+[debug] 
+[debug] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/southland-lms  
+ Mon Feb 20 2017 00:15:31 GMT+0800 (PHT)
+[debug] <<< HTTP RESPONSE 200
+[debug] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/southland-lms/tokens  
+ Mon Feb 20 2017 00:15:33 GMT+0800 (PHT)
+[debug] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'southland-lms'...
+[info] 
+[info] i  deploying database, hosting
+[info] ✔  database: rules ready to deploy.
+[info] i  hosting: preparing . directory for upload...
+[debug] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/southland-lms/uploads/-KdM92huuUmlzv7la4hC?fileCount=5106&message=  
+ Mon Feb 20 2017 00:16:08 GMT+0800 (PHT)
