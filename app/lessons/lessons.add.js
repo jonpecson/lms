@@ -1,7 +1,7 @@
 /*
  * IIFE to encapsulate code and avoid global variables
  */
-(function () {
+(function() {
 
     /*
      * attaching results controller function to the turtleFacts module 
@@ -37,7 +37,7 @@
         console.log("Creating a lessons reference.");
         vm.lessons = $firebaseArray(ref);
 
-        vm.lessons.$loaded().then(function () {
+        vm.lessons.$loaded().then(function() {
             console.log(vm.lessons);
         })
 
@@ -96,7 +96,7 @@
             'previousSelector': '.button-previous',
             'firstSelector': '.button-first',
             'lastSelector': '.button-last',
-            onNext: function () {
+            onNext: function() {
                 page = page + 1;
                 var $valid = angular.element('#wizardForm').valid(),
                     $validator;
@@ -113,6 +113,9 @@
 
                     // Create a storage reference 
                     var storageRef = firebase.storage().ref();
+
+
+
 
                     // Upload a file
                     var uploadTask = storageRef.child('images/' + vm.lesson.thumbnail.name).put(vm.lesson.thumbnail);
@@ -134,14 +137,14 @@
                             console.log(vm.lessons);
                             console.log(vm.lesson);
 
-                            vm.lessons.$loaded().then(function () {
+                            vm.lessons.$loaded().then(function() {
                                 vm.lessons.$add({
                                     title: vm.lesson.title,
                                     description: vm.lesson.description,
                                     thumbnail: imgUrl,
                                     yearLevel: vm.lesson.yearLevel,
                                     content: vm.lesson.content
-                                }).then(function (x) {
+                                }).then(function(x) {
                                     console.log('Adding lesson complete: ' + x);
                                 });
                             })
@@ -176,7 +179,7 @@
                 }
 
             },
-            onTabClick: function () {
+            onTabClick: function() {
                 return false;
             }
         };

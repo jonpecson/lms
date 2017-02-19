@@ -1,0 +1,113 @@
+<div class="page-title">
+    <div class="title">Students</div>
+    <div class="sub-title">Add new student</div>
+</div>
+
+<div>
+    <form role="form" ui-jq="validate" ui-options="validationOpt">
+        <div class="col-md-6">
+            <div class="card bg-white m-b">
+                <div class="card-header">
+                    <!--Fill up the form to add new student-->
+                    Personal Information
+                </div>
+                <div class="card-block">
+                    <div class="row">
+
+                        <div class="form-group m-b">
+                            <label>First name</label>
+                            <input type="text" class="form-control" data-ng-model="vm.student.firstName" name="firstName" required minlength="5">
+                        </div>
+                        <div class="form-group m-b">
+                            <label>Middle name</label>
+                            <input type="name" class="form-control" data-ng-model="vm.student.middleName" name="middleName" required>
+                        </div>
+                        <div class="form-group m-b ">
+                            <label>Last name</label>
+                            <input type="name" class="form-control" data-ng-model="vm.student.lastName" name="lastName" required>
+                        </div>
+
+                        <div class="form-group m-b col-sm-2">
+                            <label class="control-label">Gender</label>
+                            <select class="form-control" data-ng-model="vm.student.gender" required placeholder="Gender">
+                    <option selected="" disabled="" value="Status">Gender</option>
+                    <option selected="" value="Male">Male</option>
+                    <option value="Female">Female</option>
+                  </select>
+                        </div>
+
+                        <div class="form-group m-b col-sm-2">
+                            <label class="control-label">Year level</label>
+                            <select class="form-control" data-ng-model="vm.student.yearLevel" required>
+                    <option selected="" disabled="" value="Status">Year level</option>
+                    <option value="7">Grade 7</option>
+                    <option value="8">Grade 8</option>
+                    <option value="9">Grade 9</option>
+                    <option value="10">Grade 10</option>
+                  </select>
+                        </div>
+
+                        <div class="form-group col-sm-12">
+
+                            <label class="col-sm-2 control-label">Photo</label>
+                            <div class="col-sm-4">
+                                <input type="file" ngf-select="" data-ng-model="vm.student.photo" name="file" accept="image/*" ngf-max-size="2MB" required="" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
+
+                                <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
+                                <p class="help-block text-danger ng-hide" ng-show="myForm.file.$error.maxSize"><i class="ng-binding">File too large MB: max 2M</i></p>
+                                <img height="300" width="300" ng-show="myForm.file.$valid" ngf-thumbnail="vm.student.photo" class="thumb ng-hide" data-ng-src="vm.student.photo">
+                                <button ng-click="vm.student.photo = null" ng-show="vm.student.photo" class="btn btn-default btn-sm btn-icon ng-hide">
+            <i class="icon-close"></i>
+            <span>Remove</span>
+          </button>
+                            </div>
+
+
+                        </div>
+
+                        <div class="form-group m-b  col-sm-12">
+                            <label>Mobile Number</label>
+                            <input type="text" class="form-control" data-ng-model="vm.student.mobile" name="mobile" required>
+                        </div>
+                        <div class="form-group m-b col-sm-12">
+                            <label>Address</label>
+                            <textarea class="form-control" data-ng-model="vm.student.address" row="3" required> </textarea>
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="card bg-white m-b">
+                <div class="card-header">
+                    Account Details
+                </div>
+                <div class="card-block">
+                    <div class="row">
+                        <div class="form-group m-b">
+                            <label>Username</label>
+                            <input type="text" class="form-control" data-ng-model="vm.student.username" name="username" required minlength="5">
+                        </div>
+                        <div class="form-group m-b">
+                            <label>Password</label>
+                            <input type="password" class="form-control" data-ng-model="vm.student.password" name="password" required>
+                        </div>
+
+                        <div class="form-group ">
+                            <button class="btn btn-primary m-r " data-ng-click="vm.saveStudent()">Submit</button>
+                            <button class="btn btn-default ">Reset</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>

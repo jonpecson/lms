@@ -1,7 +1,7 @@
 /*
  * IIFE to encapsulate code and avoid global variables
  */
-(function () {
+(function() {
 
     /*
      * attaching results controller function to the turtleFacts module 
@@ -11,7 +11,7 @@
         .controller("studentsCtrl", StudentsCtrl);
 
     /*
-     * injecting the [] into the lessons controller 
+     * injecting the [] into the students controller 
      * using the $inject method.
      *
      * Injecting dependencies like this is done so as to avoid issues when 
@@ -20,21 +20,36 @@
      * as strings in an array using the $inject method we can be sure angular 
      * still knows what we want to do.
      */
-    StudentsCtrl.$inject = ['Auth', '$firebaseArray', 'firebase'];
+    StudentsCtrl.$inject = ['$state', '$firebaseArray', 'firebase'];
 
     /*
      * definition of the results controller function itself. Taking 
      * quizMetrics as an argument
      */
-    function StudentsCtrl(Auth, $firebaseArray, firebase) {
+    function StudentsCtrl($state, $firebaseArray, firebase) {
         var vm = this;
-        var ref = firebase.database().ref().child("lessons");
-        vm.lessons = $firebaseArray(ref);
+        var ref = firebase.database().ref().child("students");
+        vm.students = $firebaseArray(ref);
 
-        vm.lessons.$loaded()
-            .then(function () {
-                console.log(vm.lessons);
+        vm.students.$loaded()
+            .then(function() {
+                console.log(vm.students);
             })
+
+        vm.addStudent = function() {
+            $state.go('app.students.add');
+        }
+
+        vm.editStudent = function(id) {
+            // console.log("Edit student: " + id);
+            $state.go('app.students.edit', { "id": id });
+            // $state.go('app.students.edit');
+        }
+
+        vm.removeStudent = function(id) {
+            var item = vm.students.$getRecord(id);
+            vm.students.$remove(item);
+        }
     }
 
 })();
