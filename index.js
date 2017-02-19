@@ -1,8 +1,14 @@
-var express = require('express'),
-    app = express();
+var express = require('express');
 
-app.use(express.static(__dirname));
-app.get('/', function(req, res) {
-    res.sendfile('index.html', { root: __dirname })
+var path = require('path');
+var app = express();
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+/* GET home page. */
+app.get('/', function(req, res, next) {
+    //Path to your main file
+    res.status(200).sendFile(path.join(__dirname + '../public/index.html'));
 });
-var server = app.listen(process.env.PORT || 80);
+
+app.listen(8080);
