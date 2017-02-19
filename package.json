@@ -1,22 +1,9 @@
 {
-  "name": "lms",
-  "version": "1.0.0",
-  "description": "",
-  "main": " \t",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+ssh://git@github.com/jonpecson/lms.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jonpecson/lms/issues"
-  },
-  "homepage": "https://github.com/jonpecson/lms#readme",
-  "dependencies": {
-    "express": "^4.14.1"
-  }
+    "name": "lms",
+    "version": "0.0.1",
+    "description": "A Node.js App using express",
+    "dependencies": {
+        "express": "^4.14.1"
+    },
+    "engine": "node >=0.6.x"
 }
