@@ -1,12 +1,13 @@
 {
-    "name": "lms",
-    "version": "0.0.1",
-    "description": "A Node.js App using express",
-    "dependencies": {
-        "express": "^4.14.1"
-    },
-    "engine": "node >=0.6.x",
-    "scripts": {
-        "start": "node index.js"
-    }
+  "name": "lms",
+  "version": "0.0.1",
+  "description": "A Node.js App using express",
+  "dependencies": {
+    "express": "^4.14.1",
+    "gzippo": "^0.2.0"
+  },
+  "engine": "node >=0.6.x",
+  "scripts": {
+    "start": "node index.js"
+  }
 }
