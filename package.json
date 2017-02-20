@@ -8,6 +8,6 @@
   },
   "engine": "node >=0.6.x",
   "scripts": {
-    "start": "node index.js"
+    "start": "http-server -a localhost -p 8000 ./dist"
   }
 }
