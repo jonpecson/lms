@@ -5,10 +5,10 @@
   "dependencies": {
     "express": "^4.14.1",
     "gzippo": "^0.2.0"
-  },
-  "engine": "node >=0.6.x",
-  "scripts": {
-    "prestart": "npm install",
-    "start": "http-server -a localhost -p 8000 ./dist"
   }
+  // "engine": "node >=0.6.x",
+  // "scripts": {
+  //   "prestart": "npm install",
+  //   "start": "http-server -a localhost -p 8000 ./dist"
+  // }
 }

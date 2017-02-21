@@ -194,6 +194,23 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
         })
 
 
+        // Quizzes
+         $stateProvider.state('app.quizzes', {
+            template: '<div ui-view></div>',
+            abstract: true,
+            templateUrl: '/quizzes',
+        }).state('app.quizzes.all', {
+            url: '/quizzes/all',
+            templateUrl: './app/quizzes/quizzes.all.html',
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load('./app/quizzes/quizzes.all.js');
+                }]
+            },
+            controller: 'quizzesCtrl as vm'
+        })
+
+
 
 
 

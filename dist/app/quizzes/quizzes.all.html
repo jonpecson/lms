@@ -1,0 +1,30 @@
+<div class="quiz-area">
+    <div ng-show="!vm.quizOver">
+        <h2 id="question">{{vm.question}}</h2>
+        <ul id="options">
+            <li ng-repeat="option in vm.question.options">
+                <label>
+					<input type="radio" name="answer" value="{{option}}">
+					{{option}}
+				</label>
+            </li>
+        </ul>
+        <button ng-click="vm.checkResult()" ng-show="vm.answerMode">Submit</button>
+
+        <div ng-show="!answerMode">
+            <button ng-click="vm.prevQuestion()">Previous</button>
+            <button ng-click="vm.checkAnswer()">Next</button>
+            <span ng-show="vm.correctAns">That is correct!</span>
+            <span ng-show="!vm.correctAns">Sorry, that is an incorrect answer.</span>
+        </div>
+    </div>
+
+    <!--<div ng-show="quizOver">
+        <h2>Quiz is over</h2>
+        <button ng-click="vnm.reset()">Play again</button>
+    </div>-->
+
+    <div id="vm.score}">
+        Score: {{vm.score}}
+    </div>
+</div>
