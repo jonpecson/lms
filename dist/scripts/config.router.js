@@ -208,7 +208,17 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
                 }]
             },
             controller: 'quizzesCtrl as vm'
+        }).state('app.quizzes.preview', {
+            url: '/quizzes/preview',
+            templateUrl: './app/quizzes/quizzes.preview.html',
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+                    return $ocLazyLoad.load('./app/quizzes/quizzes.preview.js');
+                }]
+            },
+            controller: 'quizzesPreviewCtrl as vm'
         })
+
 
 
 
