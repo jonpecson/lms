@@ -1,25 +1,37 @@
-<!--<div class="quiz-area">
-    <div ng-show="!vm.quizOver">
-        <h2 id="question">{{vm.question}}</h2>
-        <ul id="options">
-            <li ng-repeat="option in vm.question.options">
-                <label>
-					<input type="radio" name="answer" value="{{option}}">
-					{{option}}
-				</label>
-            </li>
-        </ul>
-        <button ng-click="vm.checkResult()" ng-show="vm.answerMode">Submit</button>
+<div class="page-title">
+    <div class="title">Quizzes</div>
+    <div class="sub-title">Javascript Quiz</div>
+</div>
 
-        <div ng-show="!answerMode">
-            <button ng-click="vm.prevQuestion()">Previous</button>
-            <button ng-click="vm.checkAnswer()">Next</button>
-            <span ng-show="vm.correctAns">That is correct!</span>
-            <span ng-show="!vm.correctAns">Sorry, that is an incorrect answer.</span>
+<col-sm-4>
+    <div class="col-md-12">
+        <div class="card bg-white no-border">
+
+            <div class="card-header">LIST OF QUIZZES CREATED
+        <a ui-sref="app.quizzes.preview"><button type="button" class="btn pull-right">Add new quiz</button></a> 
+    </div>
+            <div class="p-a bb">
+               
+            </div>
+            <ul class="notifications">
+                <li>
+                    <ul class="notifications-list">
+                        <li ng-repeat="quiz in vm.quizzes">
+                            <a href="javascript:;">
+                                <div class="notification-icon">
+                                    <div class="circle-icon bg-primary text-white">
+                                        <i class="icon-bulb"></i>
+                                    </div>
+                                </div>
+                                <span class="notification-message"><b>{{quiz.topic}}</b> for {{quiz.yearLevel}} students</span>
+                                <span class="time">2s</span>
+                            </a>
+                        </li>
+                       
+                    </ul>
+                </li>
+            </ul>
         </div>
     </div>
 
-    <div id="vm.score}">
-        Score: {{vm.score}}
-    </div>
-</div>-->
+</col-sm-4>

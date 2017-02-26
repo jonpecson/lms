@@ -174,7 +174,7 @@
 
             vm.questions.push(vm.question);
             vm.question = {}; // reset the question
-            vm.options = [];
+            // vm.options = [];
 
             vm.quizzes.$add(vm.questions);
         }
