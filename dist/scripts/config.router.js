@@ -155,6 +155,20 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
                     });
                 }]
             },
+
+            // resolve: {
+            //     deps: ['$ocLazyLoad', function($ocLazyLoad) {
+            //         return $ocLazyLoad.load([{
+            //             insertBefore: '#load_styles_before',
+            //             files: ['vendor/chosen_v1.4.0/chosen.min.css']
+            //         }, {
+            //             serie: true,
+            //             files: ['vendor/chosen_v1.4.0/chosen.jquery.min.js', 'vendor/noty/js/noty/packaged/jquery.noty.packaged.min.js', 'scripts/helpers/noty-defaults.js']
+            //         }]).then(function() {
+            //             return $ocLazyLoad.load('scripts/controllers/notifications.js');
+            //         });
+            //     }]
+            // },
             controller: 'studentsAddCtrl as vm'
         }).state('app.students.edit', {
             url: '/students/edit/:id',
@@ -248,6 +262,7 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
                     return $ocLazyLoad.load('./app/results/results.all.js')
                 }]
             },
+
             controller: 'resultsCtrl as vm'
         })
 

@@ -23,6 +23,7 @@ angular
         'n3-line-chart',
         'textAngular',
         'firebase'
+        // 'ngStorage'
     ])
     // .config(function() {
     //     // Initialize Firebase

@@ -20,20 +20,109 @@
      * as strings in an array using the $inject method we can be sure angular 
      * still knows what we want to do.
      */
-    StudentsAddCtrl.$inject = ['Auth', '$firebaseArray', 'firebase', '$state'];
+    StudentsAddCtrl.$inject = ['Auth', '$firebaseArray', 'firebase', '$state', '$localStorage'];
 
     /*
      * definition of the results controller function itself. Taking 
      * quizMetrics as an argument
      */
-    function StudentsAddCtrl(Auth, $firebaseArray, firebase, $state) {
+    function StudentsAddCtrl(Auth, $firebaseArray, firebase, $state, $localStorage) {
         var vm = this;
-        vm.student = {};
+
         var ref = firebase.database().ref().child("students");
         vm.students = $firebaseArray(ref);
         vm.students.$loaded().then(function() {
             console.log(vm.students);
         })
+
+        vm.student = {};
+
+
+
+        vm.register = function() {
+            //Check if form is filled up.
+            if (angular.isDefined(vm.student)) {
+                // Utils.show("message", "success");
+                firebase.database().ref('accounts').orderByChild('email').equalTo(vm.student.username).once('value').then(function(accounts) {
+                    if (accounts.exists()) {
+                        // Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
+                        console.log("Account already exist.")
+                    } else {
+                        //Create Firebase account.
+                        firebase.auth().createUserWithEmailAndPassword(vm.student.username, vm.student.password)
+                            .then(function() {
+                                //Add Firebase account reference to Database. Firebase v3 Implementation.
+                                firebase.database().ref().child('accounts').push({
+                                    email: vm.student.username,
+                                    userId: firebase.auth().currentUser.uid,
+                                    dateCreated: Date(),
+                                    provider: 'Firebase',
+
+                                    firstName: vm.student.firstName,
+                                    middleName: vm.student.middleName,
+                                    lastName: vm.student.lastName,
+                                    gender: vm.student.gender,
+                                    yearLevel: vm.student.yearLevel,
+                                    mobile: vm.student.mobile,
+                                    address: vm.student.address,
+
+
+                                    displayName: vm.student.firstName + vm.student.middleName.charAt(0) + vm.student.lastName,
+                                    photoURL: ''
+                                }).then(function(response) {
+                                    //Account created successfully, logging user in automatically after a short delay.
+                                    // Utils.message(Popup.successIcon, Popup.accountCreateSuccess)
+                                    //     .then(function() {
+                                    //         getAccountAndLogin(response.key);
+                                    //     })
+                                    //     .catch(function() {
+                                    //         //User closed the prompt, proceed immediately to login.
+                                    getAccountAndLogin(response.key);
+                                    //     });
+                                    $localStorage.loginProvider = "Firebase";
+                                    $localStorage.email = vm.student.username;
+                                    $localStorage.password = vm.student.password;
+                                });
+                            })
+                            .catch(function(error) {
+                                var errorCode = error.code;
+                                var errorMessage = error.message;
+                                //Show error message.
+                                console.log(errorCode);
+                                // switch (errorCode) {
+                                //     case 'auth/email-already-in-use':
+                                //         Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
+                                //         break;
+                                //     case 'auth/invalid-email':
+                                //         Utils.message(Popup.errorIcon, Popup.invalidEmail);
+                                //         break;
+                                //     case 'auth/operation-not-allowed':
+                                //         Utils.message(Popup.errorIcon, Popup.notAllowed);
+                                //         break;
+                                //     case 'auth/weak-password':
+                                //         Utils.message(Popup.errorIcon, Popup.weakPassword);
+                                //         break;
+                                //     default:
+                                //         Utils.message(Popup.errorIcon, Popup.errorRegister);
+                                //         break;
+                                // }
+                            });
+                    }
+                });
+            }
+        };
+
+        //Function to retrieve the account object from the Firebase database and store it on $localStorage.account.
+        getAccountAndLogin = function(key) {
+            firebase.database().ref('accounts/' + key).on('value', function(response) {
+                var account = response.val();
+                $localStorage.account = account;
+            });
+            $state.go('app.lessons.all');
+        };
+
+
+
 
         vm.addStudent = function() {
 
@@ -63,10 +152,18 @@
 
                 function complete() {
                     imgUrl = uploadTask.snapshot.downloadURL;
+
+
+
+
+
                     vm.student.photo = imgUrl;
-                    vm.students.$add(vm.student).then(function(x) {
-                        console.log('Adding student complete: ' + x);
-                    });
+
+                    // vm.students.$add(vm.student).then(function(x) {
+                    //     console.log('Adding student complete: ' + x);
+                    // });
+
+                    vm.register();
                 });
         }
 
