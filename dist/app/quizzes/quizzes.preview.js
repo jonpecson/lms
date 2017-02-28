@@ -1,7 +1,7 @@
 /*
  * IIFE to encapsulate code and avoid global variables
  */
-(function () {
+(function() {
 
     /*
      * attaching results controller function to the turtleFacts module 
@@ -30,104 +30,112 @@
         var vm = this;
         var ref = firebase.database().ref().child("quizzes");
         vm.quizzes = $firebaseArray(ref);
+        // vm.quizzes = [];
         vm.quiz = {};
         vm.question = {};
         vm.questions = [];
 
-        vm.quizzes.$loaded().then(function () {
+        vm.quizzes.$loaded().then(function() {
             console.log(vm.quizzes);
+            var id = "-KdtJDplRQFC05jwh7sK";
+            vm.quiz = vm.quizzes.$getRecord(id);
+            console.log(vm.quiz);
         })
 
         // vm.question.options = [];
         vm.options = [];
 
-        vm.saveQuiz = function () {
+        vm.saveQuiz = function() {
             var quiz = {};
             quiz.topic = vm.quiz.topic;
             quiz.passingScore = vm.quiz.passingScore;
             quiz.yearLevel = vm.quiz.yearLevel;
             quiz.questions = vm.questions;
 
-            vm.quizzes.$loaded().then(function () {
+            vm.quizzes.$loaded().then(function() {
                 vm.quizzes.$add(quiz);
             })
             console.log("saving quizz");
 
         }
 
-        vm.loadQuestions = function () {
-            var questions = [
-                {
-                    id: 1,
-                    title: "Where does the Kemp's Ridley Sea Turtle live?'",
-                    options: [
-                        {
-                            answer: "Tropical waters all around the world"
-                        },
-                        {
-                            answer: "Eastern Australia"
-                        },
-                        {
-                            answer: "Coastal North Atlantic"
-                        },
-                        {
-                            answer: "South pacific islands"
-                        }
-                    ],
-                    selected: "",
-                    correct: "South pacific islands"
-                }, {
-                    id: 2,
-                    title: "Where does the Kemp's Ridley Sea Turtle live?'",
-                    options: [
-                        {
-                            answer: "Tropical waters all around the world"
-                        },
-                        {
-                            answer: "Eastern Australia"
-                        },
-                        {
-                            answer: "Coastal North Atlantic"
-                        },
-                        {
-                            answer: "South pacific islands"
-                        }
-                    ],
-                    selected: "",
-                    correct: "Eastern Australia"
-                }, {
-                    id: 3,
-                    title: "Where does the Kemp's Ridley Sea Turtle live?'",
-                    options: [
-                        {
-                            answer: "Tropical waters all around the world"
-                        },
-                        {
-                            answer: "Eastern Australia"
-                        },
-                        {
-                            answer: "Coastal North Atlantic"
-                        },
-                        {
-                            answer: "South pacific islands"
-                        }
-                    ],
-                    selected: "",
-                    correct: "Tropical waters all around the world"
-                }
-            ]
+        vm.loadQuestions = function() {
+            console.log("Loading questions");
+            var questions = [{
+                id: 1,
+                title: "Where does the Kemp's Ridley Sea Turtle live?'",
+                options: [{
+                        answer: "Tropical waters all around the world"
+                    },
+                    {
+                        answer: "Eastern Australia"
+                    },
+                    {
+                        answer: "Coastal North Atlantic"
+                    },
+                    {
+                        answer: "South pacific islands"
+                    }
+                ],
+                selected: "",
+                correct: "South pacific islands"
+            }, {
+                id: 2,
+                title: "Where does the Kemp's Ridley Sea Turtle live?'",
+                options: [{
+                        answer: "Tropical waters all around the world"
+                    },
+                    {
+                        answer: "Eastern Australia"
+                    },
+                    {
 
-            vm.quizzes.$add({ questions: questions });
+                        answer: "Coastal North Atlantic"
+                    },
+                    {
+                        answer: "South pacific islands"
+                    }
+                ],
+                selected: "",
+                correct: "Eastern Australia"
+            }, {
+                id: 3,
+                title: "Where does the Kemp's Ridley Sea Turtle live?'",
+                options: [{
+                        answer: "Tropical waters all around the world"
+                    },
+                    {
+                        answer: "Eastern Australia"
+                    },
+                    {
+                        answer: "Coastal North Atlantic"
+                    },
+                    {
+                        answer: "South pacific islands"
+                    }
+                ],
+                selected: "",
+                correct: "Tropical waters all around the world"
+            }]
+
+            vm.quizzes.push({
+                topic: "General Knowledge",
+                passingScore: 2,
+                yearLevel: 'Grade 10',
+                questions: questions
+            });
+
+            vm.quiz = vm.quizzes[0];
         }
 
-        vm.addOption = function () {
+        vm.addOption = function() {
             console.log("Adding new option")
             vm.options.push({
                 answer: "Answer " + (vm.options.length + 1)
             })
         }
 
-        vm.correctAnswer = function (buttonIndex) {
+        vm.correctAnswer = function(buttonIndex) {
             var name = "answer" + buttonIndex;
             // console.log(name);
 
@@ -135,8 +143,6 @@
 
             // var correctAnswer = $('input[type="text"][name=' + name).val();
             // console.log(correctAnswer);
-
-
             for (var i = 1; i <= vm.options.length; i++) {
                 // console.log('#answer' + i, buttonIndex)
                 if (i == buttonIndex) {
@@ -155,7 +161,7 @@
 
 
 
-        vm.addQuestion = function () {
+        vm.addQuestion = function() {
             vm.question.options = [];
             // console.log(vm.question.topic);
             // console.log(vm.question.passingScore);
@@ -174,9 +180,33 @@
 
             vm.questions.push(vm.question);
             vm.question = {}; // reset the question
-            // vm.options = [];
+            vm.options = [];
 
             vm.quizzes.$add(vm.questions);
+        }
+
+        vm.checkResult = function() {
+            // for (var i = 1; i <= vm.quiz.questions.length; i++) {
+            //     if(v)
+            // }
+
+            var score = 0;
+
+            vm.quiz.questions.forEach(function(q) {
+                console.log(q)
+                if (q.selected == q.correct) {
+                    score = score + 1;
+                }
+            }, this);
+
+            console.log("Quiz title: " + vm.quiz.topic);
+            console.log("Name: John Smith")
+            console.log("You got " + score + " points");
+
+            if (score < vm.quiz.passingScore)
+                console.log("You failed. Please take the quiz again.");
+            else
+                console.log("Congratulations. You passed the exam");
         }
 
 
