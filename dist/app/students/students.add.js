@@ -67,8 +67,8 @@
                                     address: vm.student.address,
 
 
-                                    displayName: vm.student.firstName + vm.student.middleName.charAt(0) + vm.student.lastName,
-                                    photoURL: ''
+                                    displayName: vm.student.firstName + ' ' + vm.student.middleName.charAt(0) + ' ' + vm.student.lastName,
+                                    photo: vm.student.photo
                                 }).then(function(response) {
                                     //Account created successfully, logging user in automatically after a short delay.
                                     // Utils.message(Popup.successIcon, Popup.accountCreateSuccess)

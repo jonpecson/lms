@@ -35,7 +35,7 @@
 
         vm.student = {};
 
-        var ref = firebase.database().ref().child("students");
+        var ref = firebase.database().ref().child("accounts");
         vm.students = $firebaseArray(ref);
         vm.students.$loaded().then(function() {
             vm.student = vm.students.$getRecord(id);
