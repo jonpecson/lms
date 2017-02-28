@@ -1,0 +1,59 @@
+<div class="page-title">
+    <div class="title">Results</div>
+    <div class="sub-title">All Results</div>
+</div>
+
+<div class="card bg-white m-b">
+    <div class="card-header">Results Table
+        <!--<button type="button" class="btn pull-right" data-ng-click="vm.addStudent()">Add new student</button>-->
+    </div>
+    <div class="card-block p-a-0">
+        <div class="table-responsive">
+            <table class="table m-b-0">
+                <thead>
+                    <tr>
+                        <th class="col-md-1">
+                            <span></span>Topic</th>
+                        <th class="col-md-1">Name</th>
+                        <th class="col-md-1">YearLevel</th>
+                        <th class="col-md-2">Score</th>
+                        <th class="col-md-2">Total</th>
+                        <th class="col-md-1">Status</th>
+                        <th class="col-md-1">Date</th>
+                        <!--<th class="col-md-1">Action</th>-->
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr data-ng-repeat="result in vm.results">
+                        <td>
+                            <span>{{result.topic}}</span></td>
+                        <td>{{result.displayName}}</td>
+                        <td>{{result.yearLevel}}</td>
+                        <td>{{result.score}}</td>
+                        <td>
+                            {{result.total}}
+                        </td>
+                        <td>
+                            {{result.status}}
+                        </td>
+                        <td>
+                            {{result.date}}
+                        </td>
+                        <!--<td>
+                            <button type="button" ng-click="vm.editStudent(student.$id)" class="btn btn-sm row">
+				<i class="glyphicon glyphicon-pencil"></i>
+			</button>
+
+                            <button type="button" ng-click="vm.removeStudent(student.$id)" class="btn btn-sm btn-danger">
+				<i class="glyphicon glyphicon-trash">
+				</i>
+			</button>
+                        </td>-->
+                    </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
