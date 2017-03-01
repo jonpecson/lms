@@ -1,15 +1,13 @@
 <div class="brand">
 
     <!-- toggle small sidebar menu -->
-    <a href="javascript:;" class="toggle-apps hidden-xs" ng-click="toggle.quickLaunch = !toggle.quickLaunch">
+    <!--<a href="javascript:;" class="toggle-apps hidden-xs" ng-click="toggle.quickLaunch = !toggle.quickLaunch">
         <i class="icon-grid"></i>
-    </a>
+    </a>-->
     <!-- /toggle small sidebar menu -->
 
     <!-- toggle offscreen menu -->
-    <div class="toggle-offscreen">
-        <offscreen class="visible-xs"></offscreen>
-    </div>
+
     <!-- /toggle offscreen menu -->
 
     <!-- logo -->
@@ -21,42 +19,6 @@
 
 </div>
 
-<div ng-if="toggle.quickLaunch">
-    <ul class="quick-launch-apps">
-        <li>
-            <a ui-sref="app.apps.gallery" ng-click="toggle.quickLaunch = !toggle.quickLaunch">
-                <span class="app-icon bg-danger text-white">
-          G
-        </span>
-                <span class="app-title" translate="menu.GALLERY"></span>
-            </a>
-        </li>
-        <li>
-            <a ui-sref="app.apps.messages" ng-click="toggle.quickLaunch = !toggle.quickLaunch">
-                <span class="app-icon bg-success text-white">
-          M
-        </span>
-                <span class="app-title" translate="menu.MESSAGES"></span>
-            </a>
-        </li>
-        <li>
-            <a ui-sref="app.apps.social" ng-click="toggle.quickLaunch = !toggle.quickLaunch">
-                <span class="app-icon bg-primary text-white">
-          S
-        </span>
-                <span class="app-title" translate="menu.SOCIAL"></span>
-            </a>
-        </li>
-        <li>
-            <a ui-sref="app.apps.travel" ng-click="toggle.quickLaunch = !toggle.quickLaunch">
-                <span class="app-icon bg-info text-white">
-          T
-        </span>
-                <span class="app-title" translate="menu.TRAVEL"></span>
-            </a>
-        </li>
-    </ul>
-</div>
 
 <!-- main navigation -->
 <nav role="navigation" side-navigation ng-if="!toggle.quickLaunch">
