@@ -3,10 +3,13 @@
         <div class="card bg-white no-border">
             <div class="card-block">
                 <form role="form" class="form-layout">
+
+                    <p class="danger" ng-if="vm.errorMessages">{{vm.errorMessages}}</p>
                     <div class="text-center m-b">
-                        <h4 class="text-uppercase">Southland College</h4>
-                        <img src="" alt="">
-                        <p>Please sign in to your account</p>
+                        <h4 class="text-uppercase">Administrator</h4>
+                        <br>
+                        <img src="/images/logo.jpg" alt="">
+                        <!--<p>Please sign in to your account</p>-->
                     </div>
                     <div class="form-inputs">
                         <label class="text-uppercase">Your email address</label>
@@ -19,7 +22,7 @@
                     <div class="divider">
                         <span>OR</span>
                     </div>
-                    <a class="btn btn-block no-bg btn-lg m-b" ui-sref="user.signup">Signup</a>
+                    <!--<a class="btn btn-block no-bg btn-lg m-b" ui-sref="user.signup">Signup</a>-->
                     <p class="text-center">
                         <small>
               <em>By clicking Log in you agree to our <a href="#">terms and conditions</a></em>

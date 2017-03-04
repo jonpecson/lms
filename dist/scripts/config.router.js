@@ -12,6 +12,7 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams',
             if (user) {
                 // User is signed in.
                 console.log(' User is signed in.');
+                $state.go('app.lessons.all');
             } else {
                 // No user is signed in.
                 console.log(' No user is signed in.');

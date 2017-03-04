@@ -28,7 +28,7 @@
      */
     function StudentsCtrl($state, $firebaseArray, firebase) {
         var vm = this;
-        var ref = firebase.database().ref().child("accounts");
+        var ref = firebase.database().ref().child("students");
         vm.students = $firebaseArray(ref);
 
         vm.students.$loaded()

@@ -47,6 +47,15 @@
                   </select>
                         </div>
 
+                        <div class="form-group m-b col-sm-2">
+                            <label class="control-label">Section</label>
+                            <select class="form-control" data-ng-model="    ">
+                    <option selected="" disabled="" value="Section">Section</option>
+                    <option name="section{{$parent.$index}}" value="{{section}}" value="$index"ng-repeat="section in vm.sections">{{section}}</option>
+                    
+                  </select>
+                        </div>
+
                         <div class="form-group col-sm-12">
 
                             <label class="col-sm-2 control-label">Photo</label>

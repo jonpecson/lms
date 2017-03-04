@@ -20,13 +20,13 @@
      * as strings in an array using the $inject method we can be sure angular 
      * still knows what we want to do.
      */
-    StudentsAddCtrl.$inject = ['Auth', '$firebaseArray', 'firebase', '$state', '$localStorage'];
+    StudentsAddCtrl.$inject = ['Auth', '$firebaseArray', 'firebase', '$state', '$localStorage', '$filter'];
 
     /*
      * definition of the results controller function itself. Taking 
      * quizMetrics as an argument
      */
-    function StudentsAddCtrl(Auth, $firebaseArray, firebase, $state, $localStorage) {
+    function StudentsAddCtrl(Auth, $firebaseArray, firebase, $state, $localStorage, $filter) {
         var vm = this;
 
         var ref = firebase.database().ref().child("students");
@@ -36,6 +36,21 @@
         })
 
         vm.student = {};
+        vm.sections = [];
+
+        vm.onYearLevelSelected = function() {
+            console.log(vm.student.yearLevel);
+            console.log("Hello World!");
+            if (vm.student.yearLevel == 7) {
+                vm.sections = ['Hawthorne', 'Milton', 'Bacon'];
+            } else if (vm.student.yearLevel == 7) {
+                vm.sections = ['Gibran', 'Twain', 'Middleton'];
+            } else if (vm.student.yearLevel == 9) {
+                vm.sections = ['Beckette', 'Shakespeare', 'Greenwood'];
+            } else if (vm.student.yearLevel == 10) {
+                vm.sections = ['Homer', 'Vreeland', 'Hemingway']
+            }
+        }
 
 
 
@@ -43,7 +58,7 @@
             //Check if form is filled up.
             if (angular.isDefined(vm.student)) {
                 // Utils.show("message", "success");
-                firebase.database().ref('accounts').orderByChild('email').equalTo(vm.student.username).once('value').then(function(accounts) {
+                firebase.database().ref('students').orderByChild('email').equalTo(vm.student.username).once('value').then(function(accounts) {
                     if (accounts.exists()) {
                         // Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
                         console.log("Account already exist.")
@@ -52,7 +67,7 @@
                         firebase.auth().createUserWithEmailAndPassword(vm.student.username, vm.student.password)
                             .then(function() {
                                 //Add Firebase account reference to Database. Firebase v3 Implementation.
-                                firebase.database().ref().child('accounts').push({
+                                firebase.database().ref().child('students').push({
                                     email: vm.student.username,
                                     userId: firebase.auth().currentUser.uid,
                                     dateCreated: Date(),
@@ -65,6 +80,7 @@
                                     yearLevel: vm.student.yearLevel,
                                     mobile: vm.student.mobile,
                                     address: vm.student.address,
+                                    section: vm.student.section,
 
 
                                     displayName: vm.student.firstName + ' ' + vm.student.middleName.charAt(0) + ' ' + vm.student.lastName,
@@ -123,7 +139,7 @@
 
 
 
-
+        // deprecated
         vm.addStudent = function() {
 
             //Holds the image url upload to firebase

@@ -35,11 +35,27 @@
 
         vm.student = {};
 
-        var ref = firebase.database().ref().child("accounts");
+        var ref = firebase.database().ref().child("students");
         vm.students = $firebaseArray(ref);
         vm.students.$loaded().then(function() {
             vm.student = vm.students.$getRecord(id);
         })
+
+        vm.sections = [];
+
+        vm.onYearLevelSelected = function() {
+            console.log(vm.student.yearLevel);
+            console.log("Hello World!");
+            if (vm.student.yearLevel == 7) {
+                vm.sections = ['Hawthorne', 'Milton', 'Bacon'];
+            } else if (vm.student.yearLevel == 7) {
+                vm.sections = ['Gibran', 'Twain', 'Middleton'];
+            } else if (vm.student.yearLevel == 9) {
+                vm.sections = ['Beckette', 'Shakespeare', 'Greenwood'];
+            } else if (vm.student.yearLevel == 10) {
+                vm.sections = ['Homer', 'Vreeland', 'Hemingway']
+            }
+        }
 
         vm.saveStudent = function() {
             console.log(vm.student.photo);
