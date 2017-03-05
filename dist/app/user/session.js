@@ -92,10 +92,7 @@
         console.log('Session Controller');
         var vm = this;
         vm.errorMessages = [];
-        vm.user = {
-            // "email": "jon@hybrain.co",
-            // "password": "@123qweasd"
-        };
+
 
         // // Everytime the app redirects in signin page it will logout the login user
         // console.log('Logging out user');
@@ -122,20 +119,35 @@
         };
 
         loginWithFirebase = function(email, password) {
+            $localStorage.account = {};
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(function(response) {
                     //Retrieve the account from the Firebase Database
                     var userId = firebase.auth().currentUser.uid;
                     firebase.database().ref('students').orderByChild('userId').equalTo(userId).once('value').then(function(accounts) {
+                        console.log("Logging in");
+
                         if (accounts.exists()) {
+                            console.log("Logging in");
                             accounts.forEach(function(account) {
+                                console.log("Logging in");
                                 //Account already exists, proceed to home.
                                 firebase.database().ref('students/' + account.key).on('value', function(response) {
-                                    var account = response.val();
+                                    var account = {
+                                        usertype: 'student'
+                                    }
                                     $localStorage.account = account;
+
+                                    console.log(JSON.stringify(account));
                                 });
-                                // $state.go('app.lessons.all');
+
                             });
+                        } else {
+                            var account = {
+                                usertype: 'admin'
+                            }
+                            $localStorage.account = account;
+                            $state.go('app.dashboard');
                         }
                     });
                     $localStorage.loginProvider = "Firebase";
