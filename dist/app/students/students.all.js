@@ -49,17 +49,17 @@
         }
 
         vm.removeStudent = function(id) {
-            // var item = vm.students.$getRecord(id);
-            // vm.students.$remove(item);
+            var item = vm.students.$getRecord(id);
+            vm.students.$remove(item);
 
 
-            user.delete().then(function() {
-                // User deleted.
-                console.log("User deleted successfully.")
-            }, function(error) {
-                // An error happened.
-                console.log("Error deleting the user.")
-            });
+            // user.delete().then(function() {
+            //     // User deleted.
+            //     console.log("User deleted successfully.")
+            // }, function(error) {
+            //     // An error happened.
+            //     console.log("Error deleting the user.")
+            // });
 
         }
     }
