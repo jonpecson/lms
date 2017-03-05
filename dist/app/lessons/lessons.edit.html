@@ -50,11 +50,11 @@
                             <div class="form-group">
                                 <label class="col-sm-2 control-label">Thumbnail</label>
                                 <div class="col-sm-10">
-                                    <input type="file"  ngf-select ng-model="vm.lesson.thumbnail" name="file" accept="image/*" ngf-max-size="2MB" required>
-                                <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
-                                <p class="help-block text-danger" ng-show="myForm.file.$error.maxSize"><i>File too large {{vm.lesson.thumbnail.size / 1000000|number:1}}MB: max 2M</i></p>
-                                <img ng-show="myForm.file.$valid" ngf-thumbnail="vm.lesson.thumbnail" class="thumb" width="200" height="150">
-                                <button ng-click="vm.lesson.thumbnail = null" ng-show="vm.lesson.thumbnail" class="btn btn-default btn-sm btn-icon">
+                                    <input type="file" ngf-select ng-model="vm.lesson.thumbnail" name="file" accept="image/*" ngf-max-size="2MB">
+                                    <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
+                                    <p class="help-block text-danger" ng-show="myForm.file.$error.maxSize"><i>File too large {{vm.lesson.thumbnail.size / 1000000|number:1}}MB: max 2M</i></p>
+                                    <img ng-show="myForm.file.$valid" ngf-thumbnail="vm.lesson.thumbnail" class="thumb" width="200" height="150">
+                                    <button ng-click="vm.lesson.thumbnail = null" ng-show="vm.lesson.thumbnail" class="btn btn-default btn-sm btn-icon">
             <i class="icon-close"></i>
             <span>Remove</span>
           </button>

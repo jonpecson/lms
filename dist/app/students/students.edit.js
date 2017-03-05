@@ -29,7 +29,8 @@
     function StudentsEditCtrl(Auth, $firebaseArray, firebase, $state, $stateParams) {
         var vm = this;
         var id = $stateParams.id;
-
+        //Holds the image url upload to firebase
+        var imgUrl;
         console.log("Edit student controller");
 
 
@@ -61,38 +62,48 @@
         vm.saveStudent = function() {
             console.log(vm.student.photo);
 
-            //Holds the image url upload to firebase
-            var imgUrl;
 
-            // Create a storage reference 
-            var storageRef = firebase.storage().ref();
+            if (vm.student.photo.name) {
+                // Create a storage reference 
+                var storageRef = firebase.storage().ref();
 
-            // Upload a fil
+                // Upload a file
 
-            var uploadTask = storageRef.child('images/' + vm.student.photo.name).put(vm.student.photo);
-            uploadTask.on('state_changed',
+                var uploadTask = storageRef.child('images/' + vm.student.photo.name).put(vm.student.photo);
+                uploadTask.on('state_changed',
 
-                function progress(snapshot) {
-                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(percentage);
-                },
+                    function progress(snapshot) {
+                        var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        console.log(percentage);
+                    },
 
-                function error(err) {
-                    console.log(err);
-                },
+                    function error(err) {
+                        console.log(err);
+                    },
 
-                function complete() {
-                    imgUrl = uploadTask.snapshot.downloadURL;
-                    console.log('Upload complete: ' + imgUrl);
-                    vm.student.photo = imgUrl;
-                    vm.students.$save(vm.student).then(function(res) {
-                        console.log(res) // true)
-                        $state.go('app.students.all');
-                    }, function(error) {
-                        console.log("Error:", error);
-                    });
-                }
-            )
+                    function complete() {
+                        imgUrl = uploadTask.snapshot.downloadURL;
+                        console.log('Upload complete: ' + imgUrl);
+
+                        saveStudentData();
+                    }
+                )
+            } else {
+                saveStudentData();
+            }
+
+
+
+        }
+
+        saveStudentData = function() {
+            vm.student.photo = imgUrl;
+            vm.students.$save(vm.student).then(function(res) {
+                console.log(res) // true)
+                $state.go('app.students.all');
+            }, function(error) {
+                console.log("Error:", error);
+            });
         }
 
 
