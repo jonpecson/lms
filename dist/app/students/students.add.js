@@ -38,7 +38,7 @@
         vm.student = {};
         vm.sections = [];
         vm.errorMessages = [];
-        vm.errorMessages.push("Hello World!")
+
 
         vm.onYearLevelSelected = function() {
             console.log(vm.student.yearLevel);
@@ -108,6 +108,7 @@
                                 vm.errorMessages.push(errorMessage);
                                 //Show error message.
                                 console.log(errorMessage);
+                                vm.errorMessages.push(errorMessage)
 
                                 // switch (errorCode) {
                                 //     case 'auth/email-already-in-use':
@@ -134,11 +135,11 @@
 
         //Function to retrieve the account object from the Firebase database and store it on $localStorage.account.
         getAccountAndLogin = function(key) {
-            firebase.database().ref('accounts/' + key).on('value', function(response) {
+            firebase.database().ref('students/' + key).on('value', function(response) {
                 var account = response.val();
                 $localStorage.account = account;
             });
-            $state.go('app.lessons.all');
+            $state.go('app.students.all');
         };
 
 
@@ -151,10 +152,8 @@
 
             // Create a storage reference 
             var storageRef = firebase.storage().ref();
-
             console.log(vm.student.photo);
             console.log(vm.student.photo.name);
-
             // Upload a file
             var uploadTask = storageRef.child('images/' + vm.student.photo.name).put(vm.student.photo);
 
@@ -169,21 +168,15 @@
                 function error(err) {
                     console.log(err);
                 },
-
                 function complete() {
                     imgUrl = uploadTask.snapshot.downloadURL;
-
-
-
-
-
                     vm.student.photo = imgUrl;
-
                     // vm.students.$add(vm.student).then(function(x) {
                     //     console.log('Adding student complete: ' + x);
                     // });
-
                     vm.register();
+
+                    $state.go('app.students.all');
                 });
         }
 

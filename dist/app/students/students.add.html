@@ -5,6 +5,7 @@
 
 <div>
     <form role="form" ui-jq="validate" ui-options="validationOpt">
+        <p class="text-danger" ng-show="vm.errorMessages" ng-repeat="error in vm.errorMessages"><b>{{error}}</b></p>
         <div class="col-md-6">
             <div class="card bg-white m-b">
                 <div class="card-header">
