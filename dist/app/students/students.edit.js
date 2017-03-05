@@ -36,6 +36,7 @@
         vm.successMessages = [];
 
 
+
         vm.student = {};
 
         var ref = firebase.database().ref().child("students");
@@ -110,14 +111,18 @@
 
         // deprecated
         vm.resetPassword = function() {
+
             firebase.auth().sendPasswordResetEmail(vm.student.username)
                 .then(function() {
                     //Shows success message.
+                    vm.successMessages = [];
                     var msg = "A message will be sent to your address containing a link to reset your password.";
-                    console.log(msg);
                     vm.successMessages.push(msg);
+                    console.log(msg);
                 })
                 .catch(function(error) {
+                    vm.errorMessages = [];
+
                     var errorCode = error.code;
                     //Show error message.
                     console.log(errorCode);
