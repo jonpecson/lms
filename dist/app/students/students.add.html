@@ -68,7 +68,7 @@
 
                                 <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
                                 <p class="help-block text-danger ng-hide" ng-show="myForm.file.$error.maxSize"><i class="ng-binding">File too large MB: max 2M</i></p>
-                                <img height="300" width="300" ng-show="myForm.file.$valid" ngf-thumbnail="vm.student.photo" class="thumb ng-hide">
+                                <img height="150" width="150" ng-show="myForm.file.$valid" ngf-thumbnail="vm.student.photo" class="thumb ng-hide">
                                 <button ng-click="vm.student.photo = null" ng-show="vm.student.photo" class="btn btn-default btn-sm btn-icon ng-hide">
             <i class="icon-close"></i>
             <span>Remove</span>
