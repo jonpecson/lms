@@ -24,7 +24,7 @@
 </div>
 
 <ul class="nav navbar-nav hidden-xs">
-    <li>
+    <!--<li>
         <a href="javascript:;" class="small-sidebar-toggle ripple" data-ng-click="app.layout.isSmallSidebar = !app.layout.isSmallSidebar">
             <i class="icon-toggle-sidebar"></i>
         </a>
@@ -34,7 +34,7 @@
             <i class="icon-close" ng-if="toggle.searchBox"></i>
             <i class="icon-magnifier" ng-if="!toggle.searchBox"></i>
         </a>
-    </li>
+    </li>-->
     <li class="navbar-form search-form" ng-if="toggle.searchBox">
         <input type="search" class="form-control search-input" placeholder="Start typing..." ng-model="searchTerm" ng-focus="focusOn()" ng-blur="focusOff()" autofocus>
         <div class="search-predict" ng-if="searchTerm && searchFocus">
@@ -187,7 +187,7 @@
             <img data-ng-src="{{user.avatar}}" class="header-avatar img-circle" alt="user" title="user">
             <span class="">
         <!--{{user.fname}} {{user.lname}}-->
-        Roger Intong
+        Admin
       </span>
             <span class="caret"></span>
         </a>

@@ -1,5 +1,77 @@
-<div data-ng-controller="dashboardCtrl">
-  <div class="m-x-n-g m-t-n-g overflow-hidden">
+<div class="row">
+    <div class="col-md-12 col-lg-6">
+
+        <div class="card card-block no-border bg-white">
+            <div class="circle-icon bg-info text-white m-r">
+                <i class="icon-book-open"></i>
+            </div>
+            <div class="overflow-hidden" style="margin-top:1px;">
+                <h3 class="m-a-0">{{vm.lessons.length}}</h3>
+                <h5 class="m-a-0 text-muted">Lessons created</h5>
+                <br>
+                <br>
+                <div class="pull-right">
+                    <a href="#/lessons/all" class="btn btn-info btn-sm">Lessons</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="col-md-12 col-lg-6">
+        <div class="card card-block no-border bg-white">
+            <div class="circle-icon bg-warning text-white m-r">
+                <i class="icon-bulb"></i>
+            </div>
+            <div class="overflow-hidden" style="margin-top:1px;">
+                <h3 class="m-a-0">{{vm.quizzes.length}}</h3>
+                <h5 class="m-a-0 text-muted">Quizzes created</h5>
+                <br>
+                <br>
+                <div class="pull-right">
+                    <a href="#/quizzes/all" class="btn btn-warning btn-sm">Quizzes</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 col-lg-6">
+        <div class="card card-block no-border bg-white">
+            <div class="circle-icon bg-primary text-white m-r">
+                <i class="icon-graph"></i>
+            </div>
+            <div class="overflow-hidden" style="margin-top:1px;">
+                <h3 class="m-a-0">{{vm.results.length}}</h3>
+                <h5 class="m-a-0 text-muted">Quiz results received</h5>
+                <br>
+                <div class="pull-right">
+                    <a href="#/results/all" class="btn btn-primary btn-sm">Results</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-12 col-lg-6">
+        <div class="card card-block no-border bg-white">
+            <div class="circle-icon bg-success text-white m-r">
+                <i class="icon-user"></i>
+            </div>
+            <div class="overflow-hidden" style="margin-top:1px;">
+                <h3 class="m-a-0">{{vm.students.length}}</h3>
+                <h5 class="m-a-0 text-muted">Registered students</h5>
+                <br>
+                <div class="pull-right">
+                    <a href="#/students/all" class="btn btn-success btn-sm">Students</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!--<div class="m-x-n-g m-t-n-g overflow-hidden">
     <div class="card m-b-0 bg-primary-dark text-white p-a-md no-border">
       <h4 class="m-t-0">
         <span class="pull-right">$ 82,560.00 This week</span>
@@ -410,4 +482,4 @@
   $(window).smartresize(function () {
     $('.same-height-cards').sameHeight(991);
   });
-</script>
+</script>-->

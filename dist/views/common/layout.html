@@ -5,19 +5,19 @@
 <!-- content panel -->
 <div class="main-panel">
 
-  <!-- top header -->
-  <div class="header navbar"  ng-class="{'search-open' : toggle.searchBox}" data-ng-include="'views/common/header.html'"></div>
-  <!-- /top header -->
+    <!-- top header -->
+    <div class="header navbar" ng-class="{'search-open' : toggle.searchBox}" data-ng-include="'views/common/header.html'"></div>
+    <!-- /top header -->
 
-  <!-- main area -->
-  <div class="main-content {{$state.current.data.contentClasses}}" data-ui-view></div>
-  <!-- /main area -->
+    <!-- main area -->
+    <div class="main-content {{$state.current.data.contentClasses}}" data-ui-view></div>
+    <!-- /main area -->
 
 </div>
 <!-- /content panel -->
 
 <!-- bottom footer -->
-<footer class="content-footer" data-ng-include="'views/common/footer.html'"></footer>
+<!--<footer class="content-footer" data-ng-include="'views/common/footer.html'"></footer>-->
 <!-- /bottom footer -->
 
 <!-- chat -->
@@ -25,5 +25,5 @@
 <!-- /chat -->
 
 <!-- options panel -->
-<div class="configuration hidden-xs" data-ng-include="'views/common/options.html'" data-ng-class="{'active': app.isConfigOpen}"></div>
+<!--<div class="configuration hidden-xs" data-ng-include="'views/common/options.html'" data-ng-class="{'active': app.isConfigOpen}"></div>-->
 <!-- /options panel -->

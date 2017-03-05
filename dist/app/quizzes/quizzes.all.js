@@ -1,7 +1,7 @@
 /*
  * IIFE to encapsulate code and avoid global variables
  */
-(function () {
+(function() {
 
     /*
      * attaching results controller function to the turtleFacts module 
@@ -30,9 +30,21 @@
         var vm = this;
         var ref = firebase.database().ref().child("quizzes");
         vm.quizzes = $firebaseArray(ref);
-        vm.quizzes.$loaded().then(function () {
+        vm.quizzes.$loaded().then(function() {
             console.log(vm.quizzes);
         })
+
+        vm.removeQuiz = function(id) {
+            var item = vm.quizzes.$getRecord(id);
+            vm.quizzes.$remove(item);
+        }
+
+        vm.previewQuiz = function(id) {
+            // console.log("Edit student: " + id);
+            $state.go('app.quizzes.preview', { "id": id });
+            // $state.go('app.students.edit');
+        }
+
 
     }
 

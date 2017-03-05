@@ -8,7 +8,7 @@
         <div class="card bg-white no-border">
 
             <div class="card-header">LIST OF QUIZZES CREATED
-                <a ui-sref="app.quizzes.preview"><button type="button" class="btn pull-right">Add new quiz</button></a>
+                <a ui-sref="app.quizzes.add"><button type="button" class="btn pull-right">Add new quiz</button></a>
             </div>
             <div class="p-a bb">
 
@@ -17,7 +17,7 @@
                 <li>
                     <ul class="notifications-list">
                         <li ng-repeat="quiz in vm.quizzes">
-                            <a href="javascript:;">
+                            <a href="javascript:;" ng-click="vm.previewQuiz(quiz.$id)">
                                 <div class="notification-icon">
                                     <div class="circle-icon bg-primary text-white">
                                         <i class="icon-bulb"></i>
@@ -25,7 +25,7 @@
                                 </div>
                                 <span class="notification-message"><b>{{quiz.topic}}</b> for {{quiz.yearLevel}} students</span>
                                 <span class="time">
-                                    <button type="button" ng-click="vm.removeStudent(student.$id)" class="btn btn-sm btn-danger">
+                                    <button type="button" ng-click="vm.removeQuiz(quiz.$id)" class="btn btn-sm btn-danger">
 				<i class="glyphicon glyphicon-trash">
 				</i>
 			</button>

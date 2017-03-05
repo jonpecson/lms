@@ -20,14 +20,19 @@
      * as strings in an array using the $inject method we can be sure angular 
      * still knows what we want to do.
      */
-    QuizzesPreviewCtrl.$inject = ['$state', '$firebaseArray', 'firebase'];
+    QuizzesPreviewCtrl.$inject = ['$state', '$firebaseArray', 'firebase', '$stateParams'];
 
     /*
      * definition of the results controller function itself. Taking 
      * quizMetrics as an argument
      */
-    function QuizzesPreviewCtrl($state, $firebaseArray, firebase) {
+    function QuizzesPreviewCtrl($state, $firebaseArray, firebase, $stateParams) {
+        var id = $stateParams.id;
         var vm = this;
+        vm.totalScore = 0;
+        vm.class = "";
+        // vm.showTotal = false;
+
         var ref = firebase.database().ref().child("quizzes");
         vm.quizzes = $firebaseArray(ref);
 
@@ -36,12 +41,13 @@
         vm.question = {};
 
         vm.questions = [];
+        vm.showResult = false;
 
         vm.quizzes.$loaded().then(function() {
-            // console.log(vm.quizzes);
-            // var id = "-KdtJDplRQFC05jwh7sK";
-            // vm.quiz = vm.quizzes.$getRecord(id);
-            // console.log(vm.quiz);
+            console.log(vm.quizzes);
+            // var id = "-KdsIOWJGHic1pc9Z5HU";
+            vm.quiz = vm.quizzes.$getRecord(id);
+            console.log(vm.quiz);
         })
 
         // vm.question.options = [];
@@ -70,6 +76,7 @@
         }
 
         vm.correctAnswer = function(buttonIndex) {
+
             var name = "answer" + buttonIndex;
             for (var i = 1; i <= vm.options.length; i++) {
                 if (i == buttonIndex) {
@@ -107,27 +114,34 @@
             // vm.quizzes.$add(vm.questions);
         }
 
-        // vm.checkResult = function() {
+        vm.checkResult = function() {
+            var score = 0;
+            vm.showResult = true;
+
+            vm.quiz.questions.forEach(function(q) {
+                console.log(q)
+                if (q.selected == q.correct) {
+                    score = score + 1;
+                }
+            }, this);
+
+            vm.totalScore = score;
+
+            console.log("Quiz title: " + vm.quiz.topic);
+            console.log("Name: John Smith")
+            console.log("You got " + score + " points");
+
+            if (score < vm.quiz.passingScore) {
+                vm.class = "text-danger";
+                console.log("You failed. Please take the quiz again.");
+            } else {
+                vm.class = "text-success";
+                console.log("Congratulations. You passed the exam");
+            }
 
 
-        //     var score = 0;
 
-        //     vm.quiz.questions.forEach(function(q) {
-        //         console.log(q)
-        //         if (q.selected == q.correct) {
-        //             score = score + 1;
-        //         }
-        //     }, this);
-
-        //     console.log("Quiz title: " + vm.quiz.topic);
-        //     console.log("Name: John Smith")
-        //     console.log("You got " + score + " points");
-
-        //     if (score < vm.quiz.passingScore)
-        //         console.log("You failed. Please take the quiz again.");
-        //     else
-        //         console.log("Congratulations. You passed the exam");
-        // }
+        }
 
 
         // vm.loadQuestions = function() {

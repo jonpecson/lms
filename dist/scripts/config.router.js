@@ -10,7 +10,7 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams', '$localStorag
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                $state.go('app.lessons.all');
+                $state.go('app.dashboard');
                 // User is signed in.
                 console.log(' User is signed in.');
             } else {
@@ -44,7 +44,8 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams', '$localStorag
                         return $ocLazyLoad.load('scripts/controllers/dashboard.js');
                     });
                 }]
-            }
+            },
+            controller: 'dashboardCtrl as vm'
         })
 
 
@@ -223,8 +224,32 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams', '$localStorag
                 }]
             },
             controller: 'quizzesCtrl as vm'
+        }).state('app.quizzes.add', {
+            url: '/quizzes/add',
+            templateUrl: './app/quizzes/quizzes.add.html',
+            resolve: {
+                deps: ['$ocLazyLoad', function($ocLazyLoad) {
+
+
+                    return $ocLazyLoad.load([{
+                        name: 'ngFileUpload',
+                        files: ['vendor/ng-file-upload/ng-file-upload-all.js']
+                    }, {
+                        insertBefore: '#load_styles_before',
+                        files: ['vendor/checkbo/src/0.1.4/css/checkBo.min.css', 'vendor/chosen_v1.4.0/chosen.min.css', 'vendor/summernote/dist/summernote.css', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.min.css']
+                    }, {
+                        files: ['vendor/checkbo/src/0.1.4/js/checkBo.min.js', 'vendor/chosen_v1.4.0/chosen.jquery.min.js', 'vendor/card/lib/js/jquery.card.js', 'vendor/bootstrap/js/tab.js', 'vendor/jquery-validation/dist/jquery.validate.min.js', 'vendor/twitter-bootstrap-wizard/jquery.bootstrap.wizard.min.js', 'vendor/bootstrap/js/tooltip.js', 'vendor/bootstrap/js/dropdown.js', 'vendor/bootstrap/js/modal.js', 'vendor/bootstrap3-wysihtml5-bower/dist/bootstrap3-wysihtml5.all.js']
+                    }, {
+                        name: 'summernote',
+                        files: ['vendor/summernote/dist/summernote.min.js']
+                    }]).then(function() {
+                        return $ocLazyLoad.load('./app/quizzes/quizzes.add.js')
+                    });
+                }]
+            },
+            controller: 'quizzesAddCtrl as vm'
         }).state('app.quizzes.preview', {
-            url: '/quizzes/preview',
+            url: '/quizzes/preview/:id',
             templateUrl: './app/quizzes/quizzes.preview.html',
             resolve: {
                 deps: ['$ocLazyLoad', function($ocLazyLoad) {

@@ -1,121 +1,42 @@
 <div class="page-title">
-    <div class="title">Quiz Creator</div>
-    <div class="sub-title">Let's Create a Quiz</div>
+    <div class="title">{{vm.quiz.topic}}</div>
+    <div class="sub-title">L{{vm.quiz.description}}</div>
 </div>
 
-<div class="card bg-white m-b">
-    <button type="button" class="btn pull-right" data-ng-click="vm.loadQuestions()">Load <questions></questions></button>
+<div class="card bg-white m-b" ng-show="vm.showResult">
     <div class="card-block">
-        <div class="form-group">
-            <!--<label><b>What is the topic of this quiz?</b></label>
-            <p>Your quiz must have at least three questions.</p>-->
-            <h2>Topic</h2>
-
-            <input ng-model="vm.quiz.topic" type="text" class="form-control" placeholder="What is the topic of the quiz?">
-
-        </div>
-
-        <div class="form-group">
-            <!--<label><b>What is the topic of this quiz?</b></label>
-            <p>Your quiz must have at least three questions.</p>-->
-            <h2>Description</h2>
-
-            <textarea ng-model="vm.quiz.description" row="3" class="form-control" placeholder="What is the description?"> </textarea>
-
-        </div>
-
-        <div class="form-group">
-            <!--<label><b>What is the passing score?</b></label>-->
-            <h2>Passing Score</h2>
-            <input ng-model="vm.quiz.passingScore" type="number" class="form-control" placeholder="What is the passing score?">
-
-        </div>
-
-        <div class="form-group">
-            <h2>Year Level</h2>
-            <select class="form-control" data-ng-model="vm.quiz.yearLevel">
-                
-                    <option selected="" disabled="" value="Status">Year level</option>
-                    <option value="7">Grade 7</option>
-                    <option value="8">Grade 8</option>
-                    <option value="9">Grade 9</option>
-                    <option value="10">Grade 10</option>
-                  </select>
-        </div>
+        <h1 ng-class="vm.class">TOTAL SCORE: {{vm.totalScore}}</h1>
+        <h1 ng-class="vm.class">PASSING SCORE: {{vm.quiz.passingScore}}</h1>
     </div>
-
 </div>
 
-
-<div class="card bg-white m-b">
-    <button type="button" class="btn pull-right" data-ng-click="vm.saveQuiz()">Save Quiz</button>
-    <button type="button" class="btn pull-right" data-ng-click="vm.addQuestion()">Add new Question</button>
-    <button type="button" class="btn pull-right" data-ng-click="vm.addOption()">Add new Option</button>
-    <div class="card-block">
-
-        <h1>Question #{{vm.questions.length+1}}</h1>
-
-
-        <div class="form-group">
-            <!--<label><b>What is the question?</b></label>-->
-            <!--<input ng-model="vm.question.title" type="text" class="form-control" placeholder="What is the question?">-->
-            <div text-angular ng-model="vm.question.title" name="demo-editor" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
-
-
-        </div>
-
-        <!--<div class="form-group">
-            <div class="row">
-                <div text-angular ng-model="vm.question.title" name="demo-editor" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
-            </div>
-        </div>-->
-
-
-
-        <div class="form-group">
-            <label><b>Possible answers:</b></label>
-            <div class="input-group m-b" ng-repeat="option in vm.options">
-
-                <input type="text" class="form-control br0" name="{{'answer'+($index+1)}}" placeholder="{{option.answer}}">
-                <span class="input-group-btn">
-<button class="btn btn-danger" id="{{'answer'+($index+1)}}" type="button" ng-click="vm.correctAnswer($index+1)">{{option.answer}}</button>
-</span>
-            </div>
-
-
-            <p>{{vm.question.options | json}}</p>
-
-        </div>
-
-    </div>
-
-
-
-
-
-</div>
-<!--
 <div class="card bg-white m-b">
 
     <button type="button" class="btn pull-right" data-ng-click="vm.checkResult()">Check Result</button>
 
     <div class="card-block">
         <div class="" ng-repeat="question in vm.quiz.questions">
-            <hp>{{$index+1}}.) </p>
-                <div ta-bind ng-model="question.title"></div>
-                <div class="form-group">
-                    <div class="radio" ng-repeat="option in question.options">
-                        <label>
+            <!--<hp>{{$index+1}}.) </p>-->
+            <div ta-bind ng-model="question.title"></div>
+            <div class="form-group">
+                <div class="radio" ng-repeat="option in question.options">
+                    <label>
                 <input type="radio"  name="question{{$parent.$index}}" value="{{option.answer}}" ng-model="question.selected">
                 {{option.answer}}
             </label>
-                    </div>
-                    <p>{{question | json}}</p>
                 </div>
+                <!--<p>{{question | json}}</p>-->
+
+                <p class="text-success" ng-show="vm.showResult"><b>Correct answer: {{question.correct}}</b></p>
+            </div>
+
+            <br>
+            <br>
+
 
         </div>
     </div>
 
 
 
-</div>-->
+</div>
