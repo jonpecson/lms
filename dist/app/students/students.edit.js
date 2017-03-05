@@ -97,12 +97,13 @@
         }
 
         saveStudentData = function() {
-            vm.students.$save(vm.student).then(function(res) {
-                console.log(res) // true)
-                $state.go('app.students.all');
-            }, function(error) {
-                console.log("Error:", error);
-            });
+            vm.student.displayName = vm.student.firstName + ' ' + vm.student.middleName.charAt(0) + ' ' + vm.student.lastName,
+                vm.students.$save(vm.student).then(function(res) {
+                    console.log(res) // true)
+                    $state.go('app.students.all');
+                }, function(error) {
+                    console.log("Error:", error);
+                });
         }
 
 
