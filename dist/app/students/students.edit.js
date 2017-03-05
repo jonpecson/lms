@@ -32,6 +32,8 @@
         //Holds the image url upload to firebase
         var imgUrl;
         console.log("Edit student controller");
+        vm.errorMessages = [];
+        vm.successMessages = [];
 
 
         vm.student = {};
@@ -103,6 +105,31 @@
                     $state.go('app.students.all');
                 }, function(error) {
                     console.log("Error:", error);
+                });
+        }
+
+        // deprecated
+        vm.resetPassword = function() {
+            firebase.auth().sendPasswordResetEmail(vm.student.username)
+                .then(function() {
+                    //Shows success message.
+                    vm.successMessages.push("A message will be sent to your address containing a link to reset your password.")
+                })
+                .catch(function(error) {
+                    var errorCode = error.code;
+                    //Show error message.
+                    console.log(errorCode);
+                    switch (errorCode) {
+                        case 'auth/user-not-found':
+                            vm.errorMessages.push("Email address not found.")
+                            break;
+                        case 'auth/invalid-email':
+                            vm.errorMessages.push("Invalid email.")
+                            break;
+                        default:
+                            vm.errorMessages.push("Error getting password reset link.")
+                            break;
+                    }
                 });
         }
 

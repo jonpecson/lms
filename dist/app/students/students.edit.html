@@ -108,20 +108,25 @@
                 <div class="card-block">
                     <div class="row">
                         <div class="form-group m-b">
-                            <label>Username</label>
-                            <input type="text" class="form-control" data-ng-model="vm.student.username" name="username" required minlength="5">
+                            <label>Email</label>
+                            <input type="text" disabled class="form-control" data-ng-model="vm.student.username" name="username" required minlength="5">
                         </div>
-                        <div class="form-group m-b">
+                        <!--<div class="form-group m-b">
                             <label>Password</label>
                             <input type="password" class="form-control" data-ng-model="vm.student.password" name="password" required>
-                        </div>
+                        </div>-->
 
                         <div class="form-group ">
                             <button class="btn btn-primary m-r " data-ng-click="vm.saveStudent()">Submit</button>
-                            <button class="btn btn-default ">Reset</button>
+                            <button class="btn btn-default ">Send Password Reset Link</button>
                         </div>
 
                     </div>
+
+                    <p class="text-danger" ng-show="vm.errorMessages"><b>{{vm.errorMessages[0]}}</b></p>
+                    <p class="text-success" ng-show="vm.successMessages"><b>{{vm.successMessages[0]}}</b></p>
+
+
                 </div>
             </div>
         </div>

@@ -158,11 +158,7 @@
         };
 
 
-        // deprecated
-        vm.addStudent = function() {
 
-
-        }
 
         //Function to retrieve the account object from the Firebase database and store it on $localStorage.account.
         getAccountAndLogin = function(key) {
