@@ -4,8 +4,26 @@
 </div>
 
 <div class="card bg-white m-b">
+    <!--<div class="card-header">Students Table
+        <button type="button" class="btn pull-right" data-ng-click="vm.addStudent()">Add new student</button>
+    </div>-->
     <div class="card-header">Results Table
         <!--<button type="button" class="btn pull-right" data-ng-click="vm.addStudent()">Add new student</button>-->
+        <!--<button type="button" class="btn pull-right" data-ng-click="vm.addStudent()">Add new student</button>-->
+
+        <!--<div class="form-group">-->
+        <!--<label class="col-sm-2 control-label">Search</label>-->
+        <!--<div class="col-sm-4 pull-right">
+            <input type="text" class="form-control pull-right">
+        </div>-->
+        <div class="col-sm-4 input-group m-b pull-right">
+            <input type="text" class="form-control br0" placeholder="Search" ng-model="searchKeywords">
+            <span class="input-group-btn">
+<button class="btn btn-positive" type="button">Search</button>
+</span>
+        </div>
+        <!--</div>-->
+
     </div>
     <div class="card-block p-a-0">
         <div class="table-responsive">
@@ -24,7 +42,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr data-ng-repeat="result in vm.results">
+                    <tr data-ng-repeat="result in vm.results | filter: searchKeywords">
                         <td>
                             <span>{{result.topic}}</span></td>
                         <td>{{result.displayName}}</td>
