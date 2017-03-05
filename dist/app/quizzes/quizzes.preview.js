@@ -30,8 +30,11 @@
         var vm = this;
         var ref = firebase.database().ref().child("quizzes");
         vm.quizzes = $firebaseArray(ref);
+
         vm.quiz = {};
+
         vm.question = {};
+
         vm.questions = [];
 
         vm.quizzes.$loaded().then(function() {
@@ -101,7 +104,7 @@
             vm.questions.push(vm.question);
             vm.question = {}; // reset the question
             vm.options = [];
-            vm.quizzes.$add(vm.questions);
+            // vm.quizzes.$add(vm.questions);
         }
 
         // vm.checkResult = function() {
