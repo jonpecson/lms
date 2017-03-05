@@ -1,7 +1,7 @@
 <div class="m-b clearfix">
-  <button type="button" class="btn btn-default" data-ng-click="vm.addLesson()"><i class="icon-folder m-r"></i>Add a lesson</button>
-  <!--<button type="button" class="btn btn-default" ng-click="vm.login()"><i class="icon-folder m-r"></i>Login</button>-->
-  <div class="pull-right">
+    <button type="button" class="btn btn-default" data-ng-click="vm.addLesson()"><i class="icon-folder m-r"></i>Add a lesson</button>
+    <!--<button type="button" class="btn btn-default" ng-click="vm.login()"><i class="icon-folder m-r"></i>Login</button>-->
+    <!--<div class="pull-right">
     <div class="btn-group dropdown" uib-dropdown="">
       <button type="button" class="btn btn-default uib-dropdown-toggle dropdown-toggle" uib-dropdown-toggle="" aria-haspopup="true"
         aria-expanded="false">Filter
@@ -28,23 +28,23 @@
             <i class="icon-arrow-right"></i>
           </button>
     </div>
-  </div>
+  </div>-->
 </div>
 
 <div class="row">
-  
-  <div class="col-sm-4" ng-repeat="lesson in vm.lessons">
-    <div class="card">
-      <img class="card-img-top img-responsive" data-ng-src="{{lesson.thumbnail}}" alt="Card image">
-      <div class="card-block">
-        <h4 class="card-title">{{lesson.title}}</h4>
-        <p class="card-text">{{lesson.description}}</p>
-        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-        <a data-ng-click="vm.previewLesson(lesson.$id)" class="btn btn-primary">Preview</a>
-        <a data-ng-click="vm.editLesson(lesson.$id)" class="btn btn-primary">Edit</a>
-        <a data-ng-click="vm.removeLesson(lesson.$id)" class="btn btn-primary">Remove</a>
-      </div>
+
+    <div class="col-sm-4" ng-repeat="lesson in vm.lessons">
+        <div class="card">
+            <img class="card-img-top img-responsive" data-ng-src="{{lesson.thumbnail}}" alt="Card image">
+            <div class="card-block">
+                <h4 class="card-title">{{lesson.title}}</h4>
+                <p class="card-text">{{lesson.description}}</p>
+                <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+                <a data-ng-click="vm.previewLesson(lesson.$id)" class="btn btn-primary">Preview</a>
+                <a data-ng-click="vm.editLesson(lesson.$id)" class="btn btn-primary">Edit</a>
+                <a data-ng-click="vm.removeLesson(lesson.$id)" class="btn btn-primary">Remove</a>
+            </div>
+        </div>
     </div>
-  </div>
 
 </div>
