@@ -1,6 +1,6 @@
 'use strict';
-angular.module('app').controller('AppCtrl', ['$scope', '$http', '$localStorage', '$timeout', '$translate',
-    function AppCtrl($scope, $http, $localStorage, $timeout, $translate) {
+angular.module('app').controller('AppCtrl', ['$scope', '$http', '$localStorage', '$timeout', '$translate', 'firebase',
+    function AppCtrl($scope, $http, $localStorage, $timeout, $translate, firebase) {
         $scope.mobileView = 767;
         $scope.app = {
             name: 'LMS',
@@ -30,6 +30,11 @@ angular.module('app').controller('AppCtrl', ['$scope', '$http', '$localStorage',
             jobDesc: 'Human Resources Guy',
             avatar: 'images/avatar.jpg',
         };
+
+        $scope.logout = function() {
+            console.log("Signing out");
+            firebase.auth().signOut();
+        }
 
         if (angular.isDefined($localStorage.layout)) {
             $scope.app.layout = $localStorage.layout;

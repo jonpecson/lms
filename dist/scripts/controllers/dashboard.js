@@ -230,5 +230,7 @@ function dashboardCtrl($scope, $interval, COLORS, $firebaseArray, firebase) {
     for (var b = 0; b < 4; b++) {
         $scope.addSlide();
     }
+
+
 }
 angular.module('app').controller('dashboardCtrl', ['$scope', '$interval', 'COLORS', '$firebaseArray', 'firebase', dashboardCtrl]);

@@ -29,7 +29,7 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams', '$localStorag
         $stateProvider.state('app', {
             abstract: true,
             templateUrl: 'views/common/layout.html',
-        }).state('user.signin', {
+        }).state('app.dashboard', {
             url: '/',
             templateUrl: 'views/dashboard.html',
             resolve: {
