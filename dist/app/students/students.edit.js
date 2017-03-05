@@ -113,7 +113,9 @@
             firebase.auth().sendPasswordResetEmail(vm.student.username)
                 .then(function() {
                     //Shows success message.
-                    vm.successMessages.push("A message will be sent to your address containing a link to reset your password.")
+                    var msg = "A message will be sent to your address containing a link to reset your password.";
+                    console.log(msg);
+                    vm.successMessages.push(msg);
                 })
                 .catch(function(error) {
                     var errorCode = error.code;
