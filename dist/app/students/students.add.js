@@ -66,7 +66,7 @@
                         // Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
                         console.log("Account already exist.")
                         var errorMessage = "Email address is already taken.";
-                        vm.errorMessages.push(errorMessage)
+                        vm.errorMessages.push(errorMessage);
                         return;
                     } else {
                         //Create Firebase account.
@@ -100,6 +100,7 @@
                                     //     .catch(function() {
                                     //         //User closed the prompt, proceed immediately to login.
                                     getAccountAndLogin(response.key);
+                                    $state.go('app.students.all');
                                     //     });
                                     // $localStorage.loginProvider = "Firebase";
                                     // $localStorage.email = vm.student.username;
@@ -137,16 +138,6 @@
             }
         };
 
-        //Function to retrieve the account object from the Firebase database and store it on $localStorage.account.
-        getAccountAndLogin = function(key) {
-            firebase.database().ref('students/' + key).on('value', function(response) {
-                var account = response.val();
-                $localStorage.account = account;
-            });
-            $state.go('app.students.all');
-        };
-
-
 
         // deprecated
         vm.addStudent = function() {
@@ -180,9 +171,18 @@
                     // });
                     vm.register();
 
-                    $state.go('app.students.all');
+
                 });
         }
+
+        //Function to retrieve the account object from the Firebase database and store it on $localStorage.account.
+        getAccountAndLogin = function(key) {
+            firebase.database().ref('students/' + key).on('value', function(response) {
+                var account = response.val();
+                $localStorage.account = account;
+            });
+            $state.go('app.students.all');
+        };
 
     }
 
