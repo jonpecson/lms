@@ -107,6 +107,8 @@
 
                                         //Add Firebase account reference to Database. Firebase v3 Implementation.
                                         firebase.database().ref().child('students').push({
+                                            username: vm.student.username,
+                                            password: vm.student.password,
                                             email: vm.student.username,
                                             userId: firebase.auth().currentUser.uid,
                                             dateCreated: Date(),

@@ -93,8 +93,8 @@
         var vm = this;
         vm.errorMessages = "";
         vm.user = {
-            "email": "jon@hybrain.co",
-            "password": "@123qweasd"
+            // "email": "jon@hybrain.co",
+            // "password": "@123qweasd"
         };
 
         // // Everytime the app redirects in signin page it will logout the login user
