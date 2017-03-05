@@ -93,62 +93,50 @@
         var vm = this;
         vm.errorMessages = [];
 
-
-        // // Everytime the app redirects in signin page it will logout the login user
-        // console.log('Logging out user');
-
-        // Auth.signOut();
-
         vm.signin = function() {
+            $localStorage.account = {};
             console.log('Signing in');
             loginWithFirebase(vm.user.email, vm.user.password);
-            //   Auth.signInWithEmailAndPassword(vm.user.email, vm.user.password).catch(function (error) {
-            //     // Handle Errors here.
-
-            //     console.log("Error");
-            //     var errorCode = error.code;
-            //     var errorMessage = error.message;
-            //     // ...
-            // }).then(function (res) {
-            //     console.log("Result");
-            //     console.log(res);
-            //     $state.go('app.lessons.all');
-
-            // });
-
         };
 
         loginWithFirebase = function(email, password) {
-            $localStorage.account = {};
+
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then(function(response) {
                     //Retrieve the account from the Firebase Database
                     var userId = firebase.auth().currentUser.uid;
                     firebase.database().ref('students').orderByChild('userId').equalTo(userId).once('value').then(function(accounts) {
-                        console.log("Logging in");
 
                         if (accounts.exists()) {
-                            console.log("Logging in");
+
                             accounts.forEach(function(account) {
-                                console.log("Logging in");
                                 //Account already exists, proceed to home.
                                 firebase.database().ref('students/' + account.key).on('value', function(response) {
-                                    var account = {
-                                        usertype: 'student'
-                                    }
-                                    $localStorage.account = account;
+                                    console.log("Logging in");
+                                    $localStorage.account = response.val();
+                                    console.log(JSON.stringify($localStorage.account));
 
-                                    console.log(JSON.stringify(account));
+                                    Auth.signInWithEmailAndPassword(email, password).catch(function(error) {
+                                        // Handle Errors here.
+
+                                        var errorCode = error.code;
+                                        console.log(error);
+                                        vm.errorMessages = [];
+                                        vm.errorMessages.push(error.message);
+                                        // ...
+                                    }).then(function(res) {
+                                        console.log("Result");
+                                        console.log(res);
+                                        // $state.go('app.lessons.all');
+
+                                    });
+
+
                                 });
 
                             });
-                        } else {
-                            var account = {
-                                usertype: 'admin'
-                            }
-                            $localStorage.account = account;
-                            $state.go('app.dashboard');
                         }
+
                     });
                     $localStorage.loginProvider = "Firebase";
                     $localStorage.email = email;

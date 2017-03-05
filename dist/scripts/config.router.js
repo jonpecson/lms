@@ -19,7 +19,7 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams', '$localStorag
                     // student not allowed, logout & redirect to signin page
                     console.log("student");
                     firebase.auth().signOut();
-                } else {
+                } else if (usertype == 'admin') {
                     // admin
                     console.log("admin");
                     $state.go('app.dashboard');

@@ -33,6 +33,10 @@ angular.module('app').controller('AppCtrl', ['$scope', '$http', '$localStorage',
 
         $scope.logout = function() {
             console.log("Signing out");
+            var account = {
+                usertype: 'student'
+            }
+            $localStorage.account = account;
             firebase.auth().signOut();
         }
 
