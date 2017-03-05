@@ -72,40 +72,99 @@
                         //Create Firebase account.
                         firebase.auth().createUserWithEmailAndPassword(vm.student.username, vm.student.password)
                             .then(function() {
-                                //Add Firebase account reference to Database. Firebase v3 Implementation.
-                                firebase.database().ref().child('students').push({
-                                    email: vm.student.username,
-                                    userId: firebase.auth().currentUser.uid,
-                                    dateCreated: Date(),
-                                    provider: 'Firebase',
-
-                                    firstName: vm.student.firstName,
-                                    middleName: vm.student.middleName,
-                                    lastName: vm.student.lastName,
-                                    gender: vm.student.gender,
-                                    yearLevel: vm.student.yearLevel,
-                                    mobile: vm.student.mobile,
-                                    address: vm.student.address,
-                                    section: vm.student.section,
 
 
-                                    displayName: vm.student.firstName + ' ' + vm.student.middleName.charAt(0) + ' ' + vm.student.lastName,
-                                    photo: vm.student.photo
-                                }).then(function(response) {
-                                    //Account created successfully, logging user in automatically after a short delay.
-                                    // Utils.message(Popup.successIcon, Popup.accountCreateSuccess)
-                                    //     .then(function() {
-                                    //         getAccountAndLogin(response.key);
-                                    //     })
-                                    //     .catch(function() {
-                                    //         //User closed the prompt, proceed immediately to login.
-                                    getAccountAndLogin(response.key);
-                                    $state.go('app.students.all');
-                                    //     });
-                                    // $localStorage.loginProvider = "Firebase";
-                                    // $localStorage.email = vm.student.username;
-                                    // $localStorage.password = vm.student.password;
-                                });
+
+
+
+
+
+
+                                //Holds the image url upload to firebase
+                                var imgUrl;
+
+                                // Create a storage reference 
+                                var storageRef = firebase.storage().ref();
+                                console.log(vm.student.photo);
+                                console.log(vm.student.photo.name);
+                                // Upload a file
+                                var uploadTask = storageRef.child('images/' + vm.student.photo.name).put(vm.student.photo);
+
+
+                                uploadTask.on('state_changed',
+
+                                    function progress(snapshot) {
+                                        var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                                        console.log(percentage);
+                                    },
+
+                                    function error(err) {
+                                        console.log(err);
+                                    },
+                                    function complete() {
+                                        imgUrl = uploadTask.snapshot.downloadURL;
+                                        vm.student.photo = imgUrl;
+                                        // vm.students.$add(vm.student).then(function(x) {
+                                        //     console.log('Adding student complete: ' + x);
+                                        // });
+                                        // vm.register();
+
+
+
+                                        //Add Firebase account reference to Database. Firebase v3 Implementation.
+                                        firebase.database().ref().child('students').push({
+                                            email: vm.student.username,
+                                            userId: firebase.auth().currentUser.uid,
+                                            dateCreated: Date(),
+                                            provider: 'Firebase',
+
+                                            firstName: vm.student.firstName,
+                                            middleName: vm.student.middleName,
+                                            lastName: vm.student.lastName,
+                                            gender: vm.student.gender,
+                                            yearLevel: vm.student.yearLevel,
+                                            mobile: vm.student.mobile,
+                                            address: vm.student.address,
+                                            section: vm.student.section,
+
+
+                                            displayName: vm.student.firstName + ' ' + vm.student.middleName.charAt(0) + ' ' + vm.student.lastName,
+                                            photo: vm.student.photo
+                                        }).then(function(response) {
+                                            //Account created successfully, logging user in automatically after a short delay.
+                                            // Utils.message(Popup.successIcon, Popup.accountCreateSuccess)
+                                            //     .then(function() {
+                                            //         getAccountAndLogin(response.key);
+                                            //     })
+                                            //     .catch(function() {
+                                            //         //User closed the prompt, proceed immediately to login.
+                                            getAccountAndLogin(response.key);
+                                            $state.go('app.students.all');
+                                            //     });
+                                            // $localStorage.loginProvider = "Firebase";
+                                            // $localStorage.email = vm.student.username;
+                                            // $localStorage.password = vm.student.password;
+                                        });
+
+
+
+
+
+
+
+                                    });
+
+
+
+
+
+
+
+
+
+
+
+
                             })
                             .catch(function(error) {
                                 var errorCode = error.code;
@@ -142,37 +201,7 @@
         // deprecated
         vm.addStudent = function() {
 
-            //Holds the image url upload to firebase
-            var imgUrl;
 
-            // Create a storage reference 
-            var storageRef = firebase.storage().ref();
-            console.log(vm.student.photo);
-            console.log(vm.student.photo.name);
-            // Upload a file
-            var uploadTask = storageRef.child('images/' + vm.student.photo.name).put(vm.student.photo);
-
-
-            uploadTask.on('state_changed',
-
-                function progress(snapshot) {
-                    var percentage = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-                    console.log(percentage);
-                },
-
-                function error(err) {
-                    console.log(err);
-                },
-                function complete() {
-                    imgUrl = uploadTask.snapshot.downloadURL;
-                    vm.student.photo = imgUrl;
-                    // vm.students.$add(vm.student).then(function(x) {
-                    //     console.log('Adding student complete: ' + x);
-                    // });
-                    vm.register();
-
-
-                });
         }
 
         //Function to retrieve the account object from the Firebase database and store it on $localStorage.account.
