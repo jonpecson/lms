@@ -140,7 +140,8 @@
                                             // $localStorage.email = vm.student.username;
                                             // $localStorage.password = vm.student.password;
                                         });
-                                        $window.history.back();
+                                        // $window.history.back();
+                                        $state.go('app.students.all');
                                     });
                             })
                             .catch(function(error) {
