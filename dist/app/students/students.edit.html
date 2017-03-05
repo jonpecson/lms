@@ -38,7 +38,7 @@
 
                         <div class="form-group m-b col-sm-2">
                             <label class="control-label">Year level</label>
-                            <select class="form-control" data-ng-model="vm.student.yearLevel" required>
+                            <select class="form-control" data-ng-model="vm.student.yearLevel" ng-change="vm.onYearLevelSelected()" required>
                     <option selected="" disabled="" value="Status">Year level</option>
                     <option value="7">Grade 7</option>
                     <option value="8">Grade 8</option>
@@ -46,15 +46,23 @@
                     <option value="10">Grade 10</option>
                   </select>
                         </div>
-
                         <div class="form-group m-b col-sm-2">
                             <label class="control-label">Section</label>
-                            <select class="form-control" data-ng-model="    ">
-                    <option selected="" disabled="" value="Section">Section</option>
-                    <option name="section{{$parent.$index}}" value="{{section}}" value="$index"ng-repeat="section in vm.sections">{{section}}</option>
+                            <select class="form-control" data-ng-model="vm.student.section">
+                    <option selected="" value="{{vm.student.section}}">{{vm.student.section}}</option>
+                    <option name="section{{$parent.$index}}" value="{{section}}" ng-repeat="section in vm.sections">{{section}}</option>
                     
                   </select>
                         </div>
+
+                        <!--<select ng-model="vm.student.section" ng-options="section for s in vm.sections">
+                        </select>
+
+                        <select ng-model="vm.student.section" ng-init="vm.student.section=vm.sections[0]" value="vm.student.section">
+  <option ng-repeat="section in vm.sections" ng-selected="$first">
+    {{ section }}
+  </option>
+</select>-->
 
                         <div class="form-group col-sm-12">
 
@@ -64,7 +72,7 @@
 
                                 <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
                                 <p class="help-block text-danger ng-hide" ng-show="myForm.file.$error.maxSize"><i class="ng-binding">File too large MB: max 2M</i></p>
-                                <img height="300" width="300" ng-show="myForm.file.$valid" ngf-thumbnail="vm.student.photo" class="thumb ng-hide" data-ng-src="vm.student.photo">
+                                <img height="150" width="150" ng-show="myForm.file.$valid" ngf-thumbnail="vm.student.photo" class="thumb ng-hide" data-ng-src="vm.student.photo">
                                 <button ng-click="vm.student.photo = null" ng-show="vm.student.photo" class="btn btn-default btn-sm btn-icon ng-hide">
             <i class="icon-close"></i>
             <span>Remove</span>

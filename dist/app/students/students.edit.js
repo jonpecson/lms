@@ -48,7 +48,7 @@
             console.log("Hello World!");
             if (vm.student.yearLevel == 7) {
                 vm.sections = ['Hawthorne', 'Milton', 'Bacon'];
-            } else if (vm.student.yearLevel == 7) {
+            } else if (vm.student.yearLevel == 8) {
                 vm.sections = ['Gibran', 'Twain', 'Middleton'];
             } else if (vm.student.yearLevel == 9) {
                 vm.sections = ['Beckette', 'Shakespeare', 'Greenwood'];
@@ -56,6 +56,7 @@
                 vm.sections = ['Homer', 'Vreeland', 'Hemingway']
             }
         }
+        vm.onYearLevelSelected();
 
         vm.saveStudent = function() {
             console.log(vm.student.photo);

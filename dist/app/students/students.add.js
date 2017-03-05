@@ -37,13 +37,15 @@
 
         vm.student = {};
         vm.sections = [];
+        vm.errorMessages = [];
+        vm.errorMessages.push("Hello World!")
 
         vm.onYearLevelSelected = function() {
             console.log(vm.student.yearLevel);
             console.log("Hello World!");
             if (vm.student.yearLevel == 7) {
                 vm.sections = ['Hawthorne', 'Milton', 'Bacon'];
-            } else if (vm.student.yearLevel == 7) {
+            } else if (vm.student.yearLevel == 8) {
                 vm.sections = ['Gibran', 'Twain', 'Middleton'];
             } else if (vm.student.yearLevel == 9) {
                 vm.sections = ['Beckette', 'Shakespeare', 'Greenwood'];
@@ -103,8 +105,10 @@
                             .catch(function(error) {
                                 var errorCode = error.code;
                                 var errorMessage = error.message;
+                                vm.errorMessages.push(errorMessage);
                                 //Show error message.
-                                console.log(errorCode);
+                                console.log(errorMessage);
+
                                 // switch (errorCode) {
                                 //     case 'auth/email-already-in-use':
                                 //         Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
