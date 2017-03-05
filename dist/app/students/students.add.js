@@ -43,6 +43,7 @@
         vm.onYearLevelSelected = function() {
             console.log(vm.student.yearLevel);
             console.log("Hello World!");
+
             if (vm.student.yearLevel == 7) {
                 vm.sections = ['Hawthorne', 'Milton', 'Bacon'];
             } else if (vm.student.yearLevel == 8) {
@@ -64,6 +65,9 @@
                     if (accounts.exists()) {
                         // Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
                         console.log("Account already exist.")
+                        var errorMessage = "Email address is already taken.";
+                        vm.errorMessages.push(errorMessage)
+                        return;
                     } else {
                         //Create Firebase account.
                         firebase.auth().createUserWithEmailAndPassword(vm.student.username, vm.student.password)
@@ -97,9 +101,9 @@
                                     //         //User closed the prompt, proceed immediately to login.
                                     getAccountAndLogin(response.key);
                                     //     });
-                                    $localStorage.loginProvider = "Firebase";
-                                    $localStorage.email = vm.student.username;
-                                    $localStorage.password = vm.student.password;
+                                    // $localStorage.loginProvider = "Firebase";
+                                    // $localStorage.email = vm.student.username;
+                                    // $localStorage.password = vm.student.password;
                                 });
                             })
                             .catch(function(error) {
