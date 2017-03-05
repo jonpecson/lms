@@ -41,8 +41,8 @@
 
 
         vm.onYearLevelSelected = function() {
-            console.log(vm.student.yearLevel);
-            console.log("Hello World!");
+            // console.log(vm.student.yearLevel);
+            // console.log("Hello World!");
 
             if (vm.student.yearLevel == 7) {
                 vm.sections = ['Hawthorne', 'Milton', 'Bacon'];
@@ -64,6 +64,7 @@
                 firebase.database().ref('students').orderByChild('email').equalTo(vm.student.username).once('value').then(function(accounts) {
                     if (accounts.exists()) {
                         // Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
+                        vm.errorMessages = [];
                         console.log("Account already exist.")
                         var errorMessage = "Email address is already taken.";
                         vm.errorMessages.push(errorMessage);
@@ -72,13 +73,6 @@
                         //Create Firebase account.
                         firebase.auth().createUserWithEmailAndPassword(vm.student.username, vm.student.password)
                             .then(function() {
-
-
-
-
-
-
-
 
                                 //Holds the image url upload to firebase
                                 var imgUrl;
