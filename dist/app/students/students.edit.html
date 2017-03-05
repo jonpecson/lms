@@ -68,7 +68,7 @@
 
                             <label class="col-sm-2 control-label">Photo</label>
                             <div class="col-sm-4">
-                                <input type="file" ngf-select="" data-ng-model="vm.student.photo" name="file" accept="image/*" ngf-max-size="2MB" required="" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
+                                <input type="file" ngf-select="" data-ng-model="vm.student.photo" name="file" accept="image/*" ngf-max-size="2MB" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
 
                                 <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
                                 <p class="help-block text-danger ng-hide" ng-show="myForm.file.$error.maxSize"><i class="ng-binding">File too large MB: max 2M</i></p>
