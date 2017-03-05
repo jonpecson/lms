@@ -111,7 +111,6 @@
                                             userId: firebase.auth().currentUser.uid,
                                             dateCreated: Date(),
                                             provider: 'Firebase',
-
                                             firstName: vm.student.firstName,
                                             middleName: vm.student.middleName,
                                             lastName: vm.student.lastName,
@@ -120,8 +119,6 @@
                                             mobile: vm.student.mobile,
                                             address: vm.student.address,
                                             section: vm.student.section,
-
-
                                             displayName: vm.student.firstName + ' ' + vm.student.middleName.charAt(0) + ' ' + vm.student.lastName,
                                             photo: vm.student.photo
                                         }).then(function(response) {
@@ -132,33 +129,17 @@
                                             //     })
                                             //     .catch(function() {
                                             //         //User closed the prompt, proceed immediately to login.
-                                            getAccountAndLogin(response.key);
-                                            $state.go('app.students.all');
+                                            // getAccountAndLogin(response.key);
+
+
+                                            // $state.go('app.students.all');
                                             //     });
                                             // $localStorage.loginProvider = "Firebase";
                                             // $localStorage.email = vm.student.username;
                                             // $localStorage.password = vm.student.password;
                                         });
-
-
-
-
-
-
-
+                                        $window.history.back();
                                     });
-
-
-
-
-
-
-
-
-
-
-
-
                             })
                             .catch(function(error) {
                                 var errorCode = error.code;
@@ -167,24 +148,6 @@
                                 //Show error message.
                                 console.log(errorMessage);
                                 vm.errorMessages.push(errorMessage)
-
-                                // switch (errorCode) {
-                                //     case 'auth/email-already-in-use':
-                                //         Utils.message(Popup.errorIcon, Popup.emailAlreadyExists);
-                                //         break;
-                                //     case 'auth/invalid-email':
-                                //         Utils.message(Popup.errorIcon, Popup.invalidEmail);
-                                //         break;
-                                //     case 'auth/operation-not-allowed':
-                                //         Utils.message(Popup.errorIcon, Popup.notAllowed);
-                                //         break;
-                                //     case 'auth/weak-password':
-                                //         Utils.message(Popup.errorIcon, Popup.weakPassword);
-                                //         break;
-                                //     default:
-                                //         Utils.message(Popup.errorIcon, Popup.errorRegister);
-                                //         break;
-                                // }
                             });
                     }
                 });
