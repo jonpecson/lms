@@ -73,7 +73,6 @@
                         //Create Firebase account.
                         firebase.auth().createUserWithEmailAndPassword(vm.student.username, vm.student.password)
                             .then(function() {
-
                                 //Holds the image url upload to firebase
                                 var imgUrl;
 
@@ -102,9 +101,6 @@
                                         //     console.log('Adding student complete: ' + x);
                                         // });
                                         // vm.register();
-
-
-
                                         //Add Firebase account reference to Database. Firebase v3 Implementation.
                                         firebase.database().ref().child('students').push({
                                             username: vm.student.username,
@@ -145,12 +141,14 @@
                                     });
                             })
                             .catch(function(error) {
+                                vm.errorMessages = [];
                                 var errorCode = error.code;
                                 var errorMessage = error.message;
-                                vm.errorMessages.push(errorMessage);
+
                                 //Show error message.
                                 console.log(errorMessage);
-                                vm.errorMessages.push(errorMessage)
+                                vm.errorMessages.push(errorMessage);
+                                // vm.errorMessages.push(errorMessage)
                             });
                     }
                 });
