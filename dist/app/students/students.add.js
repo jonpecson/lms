@@ -20,13 +20,13 @@
      * as strings in an array using the $inject method we can be sure angular 
      * still knows what we want to do.
      */
-    StudentsAddCtrl.$inject = ['Auth', '$firebaseArray', 'firebase', '$state', '$localStorage', '$filter'];
+    StudentsAddCtrl.$inject = ['Auth', '$firebaseArray', 'firebase', '$state', '$localStorage', '$filter', '$window'];
 
     /*
      * definition of the results controller function itself. Taking 
      * quizMetrics as an argument
      */
-    function StudentsAddCtrl(Auth, $firebaseArray, firebase, $state, $localStorage, $filter) {
+    function StudentsAddCtrl(Auth, $firebaseArray, firebase, $state, $localStorage, $filter, $window) {
         var vm = this;
 
         var ref = firebase.database().ref().child("students");
