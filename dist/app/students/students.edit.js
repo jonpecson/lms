@@ -112,15 +112,17 @@
         // deprecated
         vm.resetPassword = function() {
 
+            vm.successMessages = [];
+            var msg = "A message will be sent to your address containing a link to reset your password.";
+            vm.successMessages.push(msg);
+
             firebase.auth().sendPasswordResetEmail(vm.student.username)
                 .then(function() {
                     //Shows success message.
-                    vm.successMessages = [];
-                    var msg = "A message will be sent to your address containing a link to reset your password.";
-                    vm.successMessages.push(msg);
                     console.log(msg);
                 })
                 .catch(function(error) {
+                    vm.successMessages = [];
                     vm.errorMessages = [];
 
                     var errorCode = error.code;
