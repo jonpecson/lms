@@ -29,6 +29,8 @@
     function StudentsCtrl($state, $firebaseArray, firebase) {
         var vm = this;
         var ref = firebase.database().ref().child("students");
+        var user = firebase.auth().currentUser;
+
         vm.students = $firebaseArray(ref);
 
         vm.students.$loaded()
@@ -47,10 +49,9 @@
         }
 
         vm.removeStudent = function(id) {
-            var item = vm.students.$getRecord(id);
-            vm.students.$remove(item);
+            // var item = vm.students.$getRecord(id);
+            // vm.students.$remove(item);
 
-            var user = firebase.auth().currentUser;
 
             user.delete().then(function() {
                 // User deleted.
