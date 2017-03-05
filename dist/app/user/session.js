@@ -126,15 +126,15 @@
                 .then(function(response) {
                     //Retrieve the account from the Firebase Database
                     var userId = firebase.auth().currentUser.uid;
-                    firebase.database().ref('accounts').orderByChild('userId').equalTo(userId).once('value').then(function(accounts) {
+                    firebase.database().ref('students').orderByChild('userId').equalTo(userId).once('value').then(function(accounts) {
                         if (accounts.exists()) {
                             accounts.forEach(function(account) {
                                 //Account already exists, proceed to home.
-                                firebase.database().ref('accounts/' + account.key).on('value', function(response) {
+                                firebase.database().ref('students/' + account.key).on('value', function(response) {
                                     var account = response.val();
                                     $localStorage.account = account;
                                 });
-                                $state.go('app.lessons.all');
+                                // $state.go('app.lessons.all');
                             });
                         }
                     });

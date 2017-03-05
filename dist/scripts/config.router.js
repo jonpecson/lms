@@ -10,8 +10,20 @@ angular.module('app').run(['$rootScope', '$state', '$stateParams', '$localStorag
 
         firebase.auth().onAuthStateChanged(function(user) {
             if (user) {
-                $state.go('app.dashboard');
+
                 // User is signed in.
+
+                console.log(JSON.stringify($localStorage.account));
+                var usertype = $localStorage.account.usertype;
+                if (usertype == 'student') {
+                    // student not allowed, logout & redirect to signin page
+                    console.log("student");
+                    firebase.auth().signOut();
+                } else {
+                    // admin
+                    console.log("admin");
+                    $state.go('app.dashboard');
+                }
                 console.log(' User is signed in.');
             } else {
                 // No user is signed in.
