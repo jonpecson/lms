@@ -1,6 +1,6 @@
 <div class="page-title">
     <div class="title">Quizzes</div>
-    <div class="sub-title">Javascript Quiz</div>
+    <div class="sub-title">All Quizzes</div>
 </div>
 
 <col-sm-4>
@@ -8,10 +8,10 @@
         <div class="card bg-white no-border">
 
             <div class="card-header">LIST OF QUIZZES CREATED
-        <a ui-sref="app.quizzes.preview"><button type="button" class="btn pull-right">Add new quiz</button></a> 
-    </div>
+                <a ui-sref="app.quizzes.preview"><button type="button" class="btn pull-right">Add new quiz</button></a>
+            </div>
             <div class="p-a bb">
-               
+
             </div>
             <ul class="notifications">
                 <li>
@@ -24,10 +24,15 @@
                                     </div>
                                 </div>
                                 <span class="notification-message"><b>{{quiz.topic}}</b> for {{quiz.yearLevel}} students</span>
-                                <span class="time">2s</span>
+                                <span class="time">
+                                    <button type="button" ng-click="vm.removeStudent(student.$id)" class="btn btn-sm btn-danger">
+				<i class="glyphicon glyphicon-trash">
+				</i>
+			</button>
+                                </span>
                             </a>
                         </li>
-                       
+
                     </ul>
                 </li>
             </ul>
