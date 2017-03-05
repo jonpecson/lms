@@ -84,7 +84,7 @@
                     function complete() {
                         imgUrl = uploadTask.snapshot.downloadURL;
                         console.log('Upload complete: ' + imgUrl);
-
+                        vm.student.photo = imgUrl;
                         saveStudentData();
                     }
                 )
@@ -97,7 +97,6 @@
         }
 
         saveStudentData = function() {
-            vm.student.photo = imgUrl;
             vm.students.$save(vm.student).then(function(res) {
                 console.log(res) // true)
                 $state.go('app.students.all');
