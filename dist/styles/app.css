@@ -3198,8 +3198,20 @@ footer.session-footer .scroll-up {
     float: left;
     text-align: center;
     line-height: 1.875rem;
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 50%;
+}
+
+.circle-icon-large {
+    position: relative;
+    display: table;
+    margin: 0;
+    float: left;
+    text-align: center;
+    line-height: 3.875rem;
     width: 3.875rem;
-    height: 3.875rem;
+    height: 1.875rem;
     border-radius: 50%;
 }
 
