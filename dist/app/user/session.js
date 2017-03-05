@@ -91,7 +91,7 @@
     function SessionCtrl(Auth, $state, $localStorage) {
         console.log('Session Controller');
         var vm = this;
-        vm.errorMessages = "";
+        vm.errorMessages = [];
         vm.user = {
             // "email": "jon@hybrain.co",
             // "password": "@123qweasd"
@@ -145,7 +145,9 @@
                 .catch(function(error) {
                     var errorCode = error.code;
                     console.log(error);
-                    vm.errorMessages = error.message;
+                    vm.errorMessages = [];
+                    vm.errorMessages.push(error.message);
+
                 });
         }
 

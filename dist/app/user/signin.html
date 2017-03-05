@@ -4,7 +4,7 @@
             <div class="card-block">
                 <form role="form" class="form-layout">
 
-                    <p class="danger" ng-show="vm.errorMessages">{{vm.errorMessages}}</p>
+                    <p class="danger" ng-show="vm.errorMessages.length>0">{{vm.errorMessages[0]}}</p>
                     <div class="text-center m-b">
                         <h4 class="text-uppercase">Administrator</h4>
                         <br>
