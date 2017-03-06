@@ -29,6 +29,7 @@
     function LessonsAddCtrl($firebaseArray, firebase, $state) {
         var vm = this;
         vm.lesson = {};
+        vm.question = {};
         console.log("Lessons Add Controller")
 
         var ref = firebase.database().ref().child("lessons");
@@ -43,51 +44,51 @@
 
 
 
-        vm.validationOpt = {
-            rules: {
-                email: {
-                    required: true,
-                    // email: true,
-                    minlength: 3
-                },
-                desc: {
-                    required: true,
-                    minlength: 10
-                },
-                passwordfield: {
-                    required: true,
-                    minlength: 6
-                },
-                cpasswordfield: {
-                    required: true,
-                    minlength: 6,
-                    equalTo: '#passwordfield'
-                },
-                description: {
-                    required: true
-                },
-                number: {
-                    required: true
-                },
-                name: {
-                    required: true
-                },
-                expiry: {
-                    required: true
-                },
-                cvc: {
-                    required: true
-                }
-            }
-        };
+        // vm.validationOpt = {
+        //     rules: {
+        //         title: {
+        //             required: true,
+        //             // email: true,
+        //             minlength: 3
+        //         },
+        //         desc: {
+        //             required: true,
+        //             minlength: 10
+        //         },
+        //         passwordfield: {
+        //             required: true,
+        //             minlength: 6
+        //         },
+        //         cpasswordfield: {
+        //             required: true,
+        //             minlength: 6,
+        //             equalTo: '#passwordfield'
+        //         },
+        //         description: {
+        //             required: true
+        //         },
+        //         number: {
+        //             required: true
+        //         },
+        //         name: {
+        //             required: true
+        //         },
+        //         expiry: {
+        //             required: true
+        //         },
+        //         cvc: {
+        //             required: true
+        //         }
+        //     }
+        // };
 
-        vm.lesson.htmlContent = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li style="color: blue;">Super Easy <b>Theming</b> Options</li><li>Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li>Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
-        vm.text = 'Hello World';
-        vm.opt1 = {
-            toolbar: {
-                fa: true
-            }
-        };
+        // vm.lesson.htmlContent = '<h2>Try me!</h2><p>textAngular is a super cool WYSIWYG Text Editor directive for AngularJS</p><p><b>Features:</b></p><ol><li>Automatic Seamless Two-Way-Binding</li><li style="color: blue;">Super Easy <b>Theming</b> Options</li><li>Simple Editor Instance Creation</li><li>Safely Parses Html for Custom Toolbar Icons</li><li>Doesn&apos;t Use an iFrame</li><li>Works with Firefox, Chrome, and IE8+</li></ol><p><b>Code at GitHub:</b> <a href="https://github.com/fraywing/textAngular">Here</a> </p>';
+        // vm.text = 'Hello World';
+        // vm.opt1 = {
+        //     toolbar: {
+        //         fa: true
+        //     }
+        // };
 
         var page = 1;
         vm.wizardOpt = {
@@ -98,12 +99,12 @@
             'lastSelector': '.button-last',
             onNext: function() {
                 page = page + 1;
-                var $valid = angular.element('#wizardForm').valid(),
-                    $validator;
-                if (!$valid) {
-                    //$validator.focusInvalid();
-                    return false;
-                }
+                // var $valid = angular.element('#wizardForm').valid(),
+                //     $validator;
+                // if (!$valid) {
+                //     //$validator.focusInvalid();
+                //     return false;
+                // }
 
                 // Save the lesson in lastpage
                 if (page === 4) {
@@ -113,9 +114,6 @@
 
                     // Create a storage reference 
                     var storageRef = firebase.storage().ref();
-
-
-
 
                     // Upload a file
                     var uploadTask = storageRef.child('images/' + vm.lesson.thumbnail.name).put(vm.lesson.thumbnail);
@@ -150,32 +148,6 @@
                             })
                         }
                     )
-
-                    // vm.lessons.$loaded()
-                    //     .then(function () {
-                    //         vm.lessons.$add({
-                    //             title: vm.lesson.title,
-                    //             description: vm.lesson.description,
-                    //             thumbnail: imgUrl,
-                    //             yearLevel: vm.lesson.yearLevel,
-                    //             content: vm.lesson.htmlContent
-                    //         }).then(function (x) {
-                    //             console.log(x);
-                    //         });
-                    //     })
-
-                    //  vm.lessons.$loaded()
-                    // .then(function () {
-                    // vm.lessons.$add({
-                    //     title: 'Learn Java Programming For Beginners',
-                    //     description: 'A Complete Solution To Learn Java Programming By Mastering Its Basic And Advanced Topics',
-                    //     thumbnail: 'https://udemy-images.udemy.com/course/750x422/912368_859b_3.jpg',
-                    //     yearLevel: 'Grade 7',
-                    //     content: vm.lesson.htmlContent
-                    // }).then(function (x) {
-                    //     console.log(x);
-                    // });
-                    // })
                 }
 
             },

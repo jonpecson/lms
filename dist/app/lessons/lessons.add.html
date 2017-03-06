@@ -3,7 +3,8 @@
     <div class="sub-title">Steps wizard</div>
 </div>
 <div ui-jq="checkBo">
-    <form id="wizardForm" class="form-horizontal" role="form" ui-jq="validate" ui-options="vm.validationOpt">
+    <!--ui-jq="validate" ui-options="vm.validationOpt"-->
+    <form id="wizardForm" class="form-horizontal" role="form" >
         <div class="card">
             <div class="card-block p-a-0">
                 <div class="box-tab m-b-0" id="rootwizard" ui-jq="bootstrapWizard" ui-options="vm.wizardOpt">
@@ -48,16 +49,18 @@
                             </div>
 
 
+
                             <div class="form-group">
 
                                 <label class="col-sm-2 control-label">Thumbnail</label>
                                 <div class="col-sm-4">
-                                    <input type="file" ngf-select="" data-ng-model="vm.lesson.thumbnail" name="file" accept="image/*" ngf-max-size="2MB" required="" class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
+                                    <input type="file" ngf-select="" data-ng-model="vm.lesson.thumbnail" name="file" accept="image/*" ngf-max-size="2MB" required=""
+                                        class="ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required">
 
-                                    <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
-                                    <p class="help-block text-danger ng-hide" ng-show="myForm.file.$error.maxSize"><i class="ng-binding">File too large MB: max 2M</i></p>
-                                    <img height="300" width="300" ng-show="myForm.file.$valid" ngf-thumbnail="picFile" class="thumb ng-hide">
-                                    <button ng-click="picFile = null" ng-show="picFile" class="btn btn-default btn-sm btn-icon ng-hide">
+                                        <p class="help-block" ng-show="myForm.file.$error.required"><i>*required</i></p>
+                                        <p class="help-block text-danger ng-hide" ng-show="myForm.file.$error.maxSize"><i class="ng-binding">File too large MB: max 2M</i></p>
+                                        <img height="150" width="150" ng-show="myForm.file.$valid" ngf-thumbnail="vm.lesson.thumbnail" class="thumb ng-hide">
+                                        <button ng-click="vm.lesson.thumbnail = null" ng-show="vm.lesson.thumbnail" class="btn btn-default btn-sm btn-icon ng-hide">
             <i class="icon-close"></i>
             <span>Remove</span>
           </button>
@@ -66,11 +69,17 @@
 
                             </div>
 
+
                         </div>
                         <div class="tab-pane p-x-lg" id="tab2">
                             <div class="form-group">
                                 <div class="row">
-                                    <div text-angular ng-model="vm.lesson.content" name="demo-editor" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+                                    <div text-angular ng-model="vm.lesson.content" name="demo-editor" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>\
+
+                                    <div text-angular ng-model="vm.question.title" name="sample-editor" ta-text-editor-class="border-around" ta-html-editor-class="border-around"></div>
+
+
+
                                 </div>
                             </div>
                         </div>
