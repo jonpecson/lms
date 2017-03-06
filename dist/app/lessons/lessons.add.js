@@ -30,6 +30,7 @@
         var vm = this;
         vm.lesson = {};
         vm.question = {};
+        vm.lesson.content = "";
         console.log("Lessons Add Controller")
 
         var ref = firebase.database().ref().child("lessons");
