@@ -51,7 +51,7 @@
                         <td>
                             <span>{{result.topic}}</span></td>
                         <td>{{result.displayName}}</td>
-                        <td>{{result.yearLevel}}</td>
+                        <td>Grade {{result.yearLevel}}</td>
                         <td>{{result.score}}</td>
                         <td>
                             {{result.total}}
@@ -72,6 +72,10 @@
 				</i>
 			</button>
                         </td>-->
+                        <td>
+                            <p>{{result | json}}</p>
+                        </td>
+
                     </tr>
 
 
