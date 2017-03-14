@@ -50,6 +50,7 @@
         vm.saveQuiz = function() {
             var quiz = {};
             quiz.topic = vm.quiz.topic;
+            quiz.description = vm.quiz.description;
             quiz.passingScore = vm.quiz.passingScore;
             quiz.yearLevel = vm.quiz.yearLevel;
             quiz.questions = vm.questions;
